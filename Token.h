@@ -3,20 +3,20 @@
 
 #include <string>
 #include <iostream>
-
-enum class TokenType{
-    IDENTIFIER,STRING,NUMBER,
-    LEFT_PAREN,RIGHT_PAREN,
-    EOF_TOKEN
-};
+#include <any>
+#include "TokenType.h"
 
 class Token{
     private:
-        TokenType type;
-        std::string lexeme;
+        const TokenType type;
+        const std::string lexeme;
+        const std::any literal;
+        const int line;
+
 
     public:
-        Token(){}
+        Token(TokenType type,std::string lexeme,std::any literal,int line):
+        type(type),lexeme(lexeme),literal(literal),line(line){}
         friend std::ostream& operator<<(std::ostream& os,const Token&token){
             os <<"Token("<<static_cast<int>(token.type)<<",\""<<token.lexeme<<"\")";
             return os;
