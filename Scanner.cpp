@@ -12,7 +12,7 @@ void Scanner::addToken(TokenType type){
     addToken(type,nullptr);
 }
 void Scanner::addToken(TokenType type,std::any literal){
-    std::string text = source.substr(start,current);
+    std::string text = source.substr(start,current-start);
     tokens.push_back(Token(type,text,literal,line));
 }
 bool Scanner::match(char expected){
@@ -57,8 +57,16 @@ std::vector<Token> Scanner::scanTokens(){
         case '\n':
             line++;
             break;
+        case '"':string();break;
         default:
-            Livid::error(line,"Unexpected character.");
+            if(isdigit(c)){
+                number();
+            }else if(isalpha(c)){
+                identifier();
+            }
+            else{
+                Livid::error(line,"Unexpected character.");
+            }
             break;  
     }
     while(!isAtEnd){
@@ -68,4 +76,44 @@ std::vector<Token> Scanner::scanTokens(){
     tokens.emplace_back(TokenType::EOF_OF_FILE,"",std::monostate{},line);
     return tokens;
 }
-        
+void Scanner::string(){
+    while(peek()!='"'&&!isAtEnd()){
+        if(peek()=='\n') line++;
+        advance();
+    }
+    if(isAtEnd()){
+        Livid::error(line,"Untermined string.");
+        return ;
+    }
+    advance();
+    std::string value =source.substr(start+1,current-start-2);
+    addToken(TokenType::STRING,value);
+}
+void Scanner::number(){
+    while(isdigit(peek())) advance();
+    //for fractional part.
+    if(peek()=='.'&&isdigit(peeknext())){
+        advance();
+        while(isdigit(peek())) advance();
+    }
+    
+    addToken(TokenType::NUMBER,std::stod(source.substr(start,current-start)));
+}
+char Scanner::peeknext(){
+    if(current+1>=source.length()) return '\0';
+    return source[current+1];
+}       
+void Scanner::identifier(){
+    while(isAlphaNumeric(peek())) advance();
+
+    std::string text = source.substr(start, current-start);
+    TokenType type = TokenType::IDENTIFIER;  
+    auto it = keywords.find(text);
+    if (it != keywords.end()) {
+        type = it->second;  
+    }
+    addToken(type);
+}
+bool Scanner::isAlphaNumeric(char c){
+    return isalpha(c)||isdigit(c);
+}
