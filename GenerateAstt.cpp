@@ -51,8 +51,6 @@ void defineAst(const std::string& outputDir,const std::string &baseName,const st
     }
     writer << "};\n\n";
     
-    // 基类
-    writer << "// " << baseName << " 基类\n";
     writer << "class " << baseName << " {\n";
     writer << "public:\n";
     writer << "    virtual ~" << baseName << "() = default;\n";
@@ -61,7 +59,6 @@ void defineAst(const std::string& outputDir,const std::string &baseName,const st
     
     // 生成各个子类
     for (const auto& type : types) {
-        writer << "// " << type.className << " 类\n";
         writer << "class " << type.className << " : public " << baseName << ",\n";
         writer << "                                 public std::enable_shared_from_this<" << type.className << "> {\n";
         writer << "public:\n";
