@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 #include <any>
-#include "Token.h"
+#include "../Token.h"
 
 class Binary;
 class Grouping;
