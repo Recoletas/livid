@@ -9,11 +9,20 @@
 class AstPrinter : public ExprVisitor {
 public:
     std::string print(std::shared_ptr<Expr> expr) {
-        return expr->accept(*this);
+        return std::any_cast<std::string>(expr->accept(*this));
     }
 
 private:
-    // 访问各种表达式节点
+    //unelgeant string funcion(fwcpp) 
+    std::string anyToString(const std::any& value){
+        if(!value.has_value()){
+            return "";
+        }
+        if(value.type()==typeid(std::string)){
+            return std::any_cast<std::string>(value);
+        }
+        return "Error:Not a string";
+    }
     std::any visitBinaryExpr(std::shared_ptr<Binary> expr) override {
         return parenthesize(expr->op.getLexeme(), 
                             {expr->left, expr->right});
@@ -52,14 +61,14 @@ private:
         builder << "(" << name;
         for (const auto& expr : exprs) {
             builder << " ";
-            std::any result = expr->accept(*this);
-            
-            // 将 any 转换为 string
-            if (result.has_value()) {
-                if (result.type() == typeid(std::string)) {
-                    builder << std::any_cast<std::string>(result);
-                }
+
+            try {
+                builder << std::any_cast<std::string>(expr->accept(*this));
+            } catch (const std::bad_any_cast& e) {
+                // 如果出现类型错误,输出提示
+                builder << "Error-Cast"; 
             }
+            
         }
         builder << ")";
         

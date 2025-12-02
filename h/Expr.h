@@ -31,13 +31,13 @@ public:
 class Binary : public Expr,
                                  public std::enable_shared_from_this<Binary> {
 public:
-    Binary(Expr* left, Token op, Expr* right)
+    Binary(std::shared_ptr<Expr> left, Token op, std::shared_ptr<Expr> right)
         : left(left), op(op), right(right) {}
 
     // 字段
-    Expr* left;
+    std::shared_ptr<Expr> left;
     Token op;
-    Expr* right;
+    std::shared_ptr<Expr> right;
 
     std::any accept(ExprVisitor& visitor) override {
         return visitor.visitBinaryExpr(shared_from_this());
@@ -47,11 +47,11 @@ public:
 class Grouping : public Expr,
                                  public std::enable_shared_from_this<Grouping> {
 public:
-    Grouping(Expr* expression)
+    Grouping(std::shared_ptr<Expr> expression)
         : expression(expression) {}
 
     // 字段
-    Expr* expression;
+    std::shared_ptr<Expr> expression;
 
     std::any accept(ExprVisitor& visitor) override {
         return visitor.visitGroupingExpr(shared_from_this());
@@ -75,12 +75,12 @@ public:
 class Unary : public Expr,
                                  public std::enable_shared_from_this<Unary> {
 public:
-    Unary(Token op, Expr* right)
+    Unary(Token op, std::shared_ptr<Expr> right)
         : op(op), right(right) {}
 
     // 字段
     Token op;
-    Expr* right;
+    std::shared_ptr<Expr> right;
 
     std::any accept(ExprVisitor& visitor) override {
         return visitor.visitUnaryExpr(shared_from_this());

@@ -17,6 +17,18 @@ class Token{
     public:
         Token(TokenType type,std::string lexeme,std::any literal,int line):
         type(type),lexeme(lexeme),literal(literal),line(line){}
+        const std::string& getLexeme() const{
+            return lexeme;
+        }
+        TokenType getType() const{
+            return type;
+        }
+        const std::any & getLiteral() const {
+            return literal;
+        }
+        int getline() const{
+            return line;
+        }
         friend std::ostream& operator<<(std::ostream& os,const Token&token){
             os <<"Token("<<static_cast<int>(token.type)<<",\""<<token.lexeme<<"\")";
             return os;
