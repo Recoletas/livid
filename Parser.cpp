@@ -38,20 +38,67 @@ class Parser{
         Token previous(){
             return tokens[current-1];
         }
-        Expr expression(){
+        std::shared_ptr<Expr> expression(){
             return equality();
         }
-        Expr equality(){
-            Expr expr = comparision();
+        std::shared_ptr<Expr> equality(){
+            std::shared_ptr<Expr> expr = comparision();
             while(match(TokenType::BANG_EQUAL,TokenType::EQUAL_EQUAL)){
                 Token op =previous();
-                Expr right=comparison();
+                std::shared_ptr<Expr> right=comparision();
                 expr = std::make_shared<Binary>(expr,op,right);
             }
             return expr;
         }
-        Expr comparision(){
-            Expr expr =term();
-            while (match(TokenType::GREATER,TokenType::GREATER_EQUAL,))
-        }    
+        std::shared_ptr<Expr> comparision(){
+            std::shared_ptr<Expr> expr =term();
+            while (match(TokenType::GREATER,TokenType::GREATER_EQUAL,TokenType::LESS,TokenType::LESS_EQUAL)){
+                Token op=previous();
+                std::shared_ptr<Expr> right =term();
+                expr=std::make_shared<Binary>(expr,op,right);
+            }
+            return expr;
+        }
+        std::shared_ptr<Expr> term(){
+            std::shared_ptr<Expr> expr =factor();
+            while(match(TokenType::MINUS,TokenType::PLUS)){
+                Token op=previous();
+                std::shared_ptr<Expr> right =factor();
+                expr=std::make_shared<Binary>(expr,op,right);
+            }
+            return expr;
+        }
+        std::shared_ptr<Expr> factor(){
+            std::shared_ptr<Expr> expr =unary();
+            while(match(TokenType::SLASH,TokenType::STAR)){
+                Token op=previous();
+                std::shared_ptr<Expr> right =unary();
+                expr=std::make_shared<Binary>(expr,op,right);
+            }
+            return expr;
+        }
+        std::shared_ptr<Expr> unary(){
+            if(match(TokenType::BANG,TokenType::MINUS)){
+                Token op=previous();
+                std::shared_ptr<Expr> right=unary();
+                return std::make_shared<Unary>(op,right);
+            }
+            return primary();
+        }
+        std::shared_ptr<Expr> primary(){
+            if(match(TokenType::FALSE)) return std::make_shared<Literal>(false);
+            if(match(TokenType::TRUE)) return std::make_shared<Literal>(true);
+            if(match(TokenType::NIL)) return std::make_shared<Literal>(NULL);
+
+            if(match(TokenType::NUMBER,TokenType::STRING)){
+                return std::make_shared<Literal>(previous().getLiteral());
+            }
+
+            if(match(TokenType::LEFT_PAREN)){
+                std::shared_ptr<Expr> expr =expression();
+                consume(TokenType::RIGHT_PAREN,"Expect ')' after expression.");
+                return std::make_shared<Grouping>(expr);
+            }
+        }
+            
 };
