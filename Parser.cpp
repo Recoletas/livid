@@ -1,6 +1,7 @@
 #include "TokenType.h"
 #include "Token.h"
 #include "./h/Expr.h"
+#include "livid.h"
 #include <vector>
 class Parser{
     Parser(std::vector<Token> tokens){
@@ -10,6 +11,15 @@ class Parser{
         std::vector<Token> tokens;
         int current =0;
 
+        class ParseError :public std::exception{
+            private:
+                std::string message;
+            public:
+                explicit ParseError(const std::string&msg): message(msg){}
+                const char* what() const noexcept override{
+                    return message.c_str();
+                }
+        };
         template<typename... TokenTypes>
         bool match(TokenTypes... types){
             std::initializer_list<TokenType> typeList ={types...};
@@ -21,9 +31,17 @@ class Parser{
             }
             return false;
         }
+        Token consume(TokenType type,std::string message){
+            if(check(type)) return advance();
+            throw error(peek(),message);
+        }
         bool check(TokenType t){
             if(isAtEnd()) return false;
             return peek().getType()==t;
+        }
+        [[noreturn]] ParseError error(const Token& token,const std::string & message){
+            Livid::error(token.getline(),message);
+            throw ParseError(message);
         }
         Token advance(){
             if(!isAtEnd()) current++;
