@@ -4,9 +4,17 @@
 #include "livid.h"
 #include <vector>
 class Parser{
-    Parser(std::vector<Token> tokens){
-        this->tokens=tokens;
-    }
+    public:
+        Parser(std::vector<Token> tokens){
+            this->tokens=tokens;
+        }
+        std::shared_ptr<Expr> parse(){
+            try{
+                return expression();
+            }catch (ParseError error){
+                return NULL;
+            }
+        }
     private:
         std::vector<Token> tokens;
         int current =0;
@@ -42,6 +50,27 @@ class Parser{
         [[noreturn]] ParseError error(const Token& token,const std::string & message){
             Livid::error(token.getline(),message);
             throw ParseError(message);
+        }
+        void synchronize(){
+            advance();
+            while (!isAtEnd())
+            {
+                if(previous().getType()==TokenType::SEMICOLON) return;
+
+                switch ( peek().getType())
+                {
+                case TokenType::CLASS:
+                case TokenType::FUN:
+                case TokenType::VAR:
+                case TokenType::FOR:
+                case TokenType::IF:
+                case TokenType::WHILE:
+                case TokenType::PRINT:
+                case TokenType::RETURN:
+                    return;
+                }
+                advance();
+            }
         }
         Token advance(){
             if(!isAtEnd()) current++;
@@ -117,6 +146,8 @@ class Parser{
                 consume(TokenType::RIGHT_PAREN,"Expect ')' after expression.");
                 return std::make_shared<Grouping>(expr);
             }
+
+            throw error(peek(),"Expect expression.");
         }
             
 };
