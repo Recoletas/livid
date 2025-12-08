@@ -5,7 +5,8 @@
 #include "Scanner.h"
 #include "Token.h"
 #include "livid.h"
-
+#include "Parser.h"
+#include "AstPrinter.h"
 
 void Livid::runFile(const std::string& filename){
     try{
@@ -42,9 +43,13 @@ void Livid::runPrompt(){
 void Livid::run(const std::string &source){
     Scanner scanner(source);
     std::vector<Token> tokens=scanner.scanTokens();
-    for(const Token& token: tokens){
-        std::cout<<token<<std::endl;
-    }
+    Parser parser(tokens);
+    std::shared_ptr<Expr> expression=parser.parse();
+
+    if(hadError) return;
+    AstPrinter printer;
+    std::cout<<printer.print(expression)<<std::endl;
+
 }
 void Livid::error(int line,const std::string& message){
     report(line,"",message);
@@ -53,16 +58,4 @@ void Livid::error(int line,const std::string& message){
 void Livid::report(int line,const std::string &where,const std::string &message){
     std::cerr<<"[Line"<<line<<"] Error"<<where<<":"<<message<<std::endl;
     hadError=true;
-}
-
-int main(int argc,char * argv[]){
-    if(argc>2){
-        std::cout<<"Usage: Livid [script]"<<std::endl;
-        return 64;
-    }else if(argc==2){
-        Livid::runFile(argv[1]);
-    }else{
-        Livid::runPrompt();
-    }
-    return 0;
 }

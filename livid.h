@@ -1,7 +1,6 @@
-#ifndef LOX_H
-#define LOX_H
+#ifndef LIVID_H
+#define LIVID_H
 
-#include <string>
 
 class Livid {
 private:
