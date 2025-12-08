@@ -15,6 +15,12 @@ class Token{
 
 
     public:
+        Token(const Token& other):type(other.type),lexeme(other.lexeme),literal(other.literal),line(other.line){}
+        Token& operator =(const Token&)=delete;
+
+        Token(Token&&) =default;
+        Token& operator =(Token&&) =default;
+
         Token(TokenType type,std::string lexeme,std::any literal,int line):
         type(type),lexeme(lexeme),literal(literal),line(line){}
         const std::string& getLexeme() const{

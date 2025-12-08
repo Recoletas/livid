@@ -69,7 +69,7 @@ std::vector<Token> Scanner::scanTokens(){
             }
             break;  
     }
-    while(!isAtEnd){
+    while(!isAtEnd()){
         start=current;
         scanTokens();
     }

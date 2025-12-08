@@ -1,17 +1,16 @@
 #include "Parser.h"
 
-Parser::Parser(std::vector<Token> tokens){
-    this->tokens=tokens;
-}
+Parser::Parser(std::vector<Token> tokens):tokens(std::move(tokens)){}
+
 std::shared_ptr<Expr> Parser::parse(){
     try{
         return expression();
     }catch (ParseError error){
-        return NULL;
+        return nullptr;
     }
 }
 
-explicit Parser::ParseError::ParseError(const std::string&msg): message(msg){}
+Parser::ParseError::ParseError(const std::string&msg): message(msg){}
 const char* Parser::ParseError::what() const noexcept {
     return message.c_str();
 }
@@ -113,7 +112,7 @@ std::shared_ptr<Expr> Parser::unary(){
 std::shared_ptr<Expr> Parser::primary(){
     if(match(TokenType::FALSE)) return std::make_shared<Literal>(false);
     if(match(TokenType::TRUE)) return std::make_shared<Literal>(true);
-    if(match(TokenType::NIL)) return std::make_shared<Literal>(NULL);
+    if(match(TokenType::NIL)) return std::make_shared<Literal>(nullptr);
 
     if(match(TokenType::NUMBER,TokenType::STRING)){
         return std::make_shared<Literal>(previous().getLiteral());

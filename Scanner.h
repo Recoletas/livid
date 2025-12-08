@@ -5,6 +5,7 @@
 #include "livid.h"
 #include <variant>
 #include <unordered_map>
+#include <vector>
 
 class Scanner{
     private:
