@@ -1,0 +1,119 @@
+#include "Interpreter.h"
+#include <any>
+#include <stdexcept>
+#include "RuntimeError.h"
+
+
+std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
+    return expr->value;
+}
+std::any Interpreter::visitGroupingExpr(std::shared_ptr<Grouping> expr){
+    return evaluate(expr->expression);
+}
+std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
+    std::any left=evaluate(expr->left);
+    std::any right=evaluate(expr->right);
+
+    switch (expr->op.getType())
+    {
+        case TokenType::BANG_EQUAL:return !isEqual(left,right);
+        case TokenType::EQUAL_EQUAL:return !isEqual(left,right);
+        case TokenType::GREATER:{
+            checkNumberOperands(expr->op,left,right);
+            return std::any_cast<double>(left)>std::any_cast<double>(right);
+        }
+        case TokenType::GREATER_EQUAL:{
+            checkNumberOperands(expr->op,left,right);
+            return std::any_cast<double>(left)>=std::any_cast<double>(right);
+        }
+        case TokenType::LESS:{
+            checkNumberOperands(expr->op,left,right);
+            return std::any_cast<double>(left)<std::any_cast<double>(right);
+            case TokenType::LESS_EQUAL:
+            checkNumberOperands(expr->op,left,right);
+            return std::any_cast<double>(left)<=std::any_cast<double>(right); 
+        }   
+        case TokenType::MINUS:{
+            checkNumberOperands(expr->op,left,right);
+            return std::any_cast<double>(left)-std::any_cast<double>(right);
+        }
+        case TokenType::PLUS:{
+            if(left.type()==typeid(double)&&right.type()==typeid(double)){
+                return std::any_cast<double>(left)-std::any_cast<double>(right);
+            }
+            
+            if(left.type()==typeid(std::string)&&right.type()==typeid(std::string)){
+                return std::any_cast<std::string>(left)+std::any_cast<std::string>(right);
+            }
+
+            throw RuntimeError(expr->op,"Operands must be two numbers or two strings.");
+            break;
+        }
+        case TokenType::SLASH:{
+            checkNumberOperands(expr->op,left,right);
+            return std::any_cast<double>(left)/std::any_cast<double>(right);
+        }
+            
+        case TokenType::STAR:{
+            checkNumberOperands(expr->op,left,right);
+            return std::any_cast<double>(left)*std::any_cast<double>(right);
+        }
+            
+    }
+    return nullptr;
+}
+void Interpreter::checkNumberOperands(Token op,std::any left,std::any right){
+    if(left.type()==typeid(double)&&right.type()==typeid(double)) return ;
+    throw RuntimeError(op,"Operands must be numbers.");
+}
+void Interpreter::checkNumberOperand(Token op,std::any operand){
+    if(operand.type()==typeid(double)) return ;
+    throw RuntimeError(op,"Operand must be a number.");
+}
+bool Interpreter::isEqual(const std::any& a,const std::any& b){
+    if(!a.has_value()&&!b.has_value()) return true;
+    if(!a.has_value()||!b.has_value()) return false;
+    if(a.type()!=b.type()) return false;
+
+    if(a.type()==typeid(double)){
+        return std::any_cast<double>(a)==std::any_cast<double>(b);
+    }
+    if (a.type() == typeid(bool)) {
+        return std::any_cast<bool>(a) == std::any_cast<bool>(b);
+    }
+
+    if (a.type() == typeid(std::string)) {
+        return std::any_cast<std::string>(a) == std::any_cast<std::string>(b);
+    }
+    return false;
+}
+std::any Interpreter::evaluate(std::shared_ptr<Expr> expr){
+    return expr->accept(*this);
+}
+std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
+    std::any right =evaluate(expr->right);
+    switch (expr->op.getType())
+    {
+    case TokenType::MINUS:{
+        checkNumberOperand(expr->op,right);
+        return -std::any_cast<double>(right);
+    }
+        
+    case TokenType::BANG:
+        return !isTruthy(right);
+    }
+    return std::any{};
+}
+bool Interpreter::isTruthy(std::any& obj){
+    if(!obj.has_value()) return false;
+    if(obj.type()==typeid(bool)){
+        //for may problems
+        try{
+            return std::any_cast<bool>(obj);
+        }catch(const std::bad_any_cast&e){
+            return false;
+        }
+    }
+    return true;
+}
+        
