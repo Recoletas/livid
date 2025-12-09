@@ -2,12 +2,15 @@
 #define LIVID_H
 
 #include <string>
+#include "Interpreter.h"
 
 class Livid {
 private:
     static inline bool hadError = false;
-    
+    static const Interpreter interpreter ;
 public:
+    static bool hadRuntimeError;
+    static void Livid::runtimeError(const RuntimeError& error);
     static void runFile(const std::string& filename);
     static void runPrompt();
     static void run(const std::string &source);

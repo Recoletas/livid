@@ -7,6 +7,7 @@
 #include "livid.h"
 #include "Parser.h"
 #include "AstPrinter.h"
+#include "RuntimeError.h"
 
 void Livid::runFile(const std::string& filename){
     try{
@@ -22,6 +23,7 @@ void Livid::runFile(const std::string& filename){
         std::cerr<<"Error: "<<e.what()<<std::endl;
         exit(65);
     }
+    if(hadRuntimeError) exit(70);
 }
     
 void Livid::runPrompt(){
@@ -54,6 +56,13 @@ void Livid::run(const std::string &source){
 void Livid::error(int line,const std::string& message){
     report(line,"",message);
 }
+
+bool Livid::hadRuntimeError=false;
+void Livid::runtimeError(const RuntimeError& error){
+    std::cerr<<error.what()<<"\n[ line "<<error.token.getline()<<"]"<<std::endl;
+    Livid::hadRuntimeError =true;
+}
+const Interpreter Livid::interpreter=Interpreter();
 
 void Livid::report(int line,const std::string &where,const std::string &message){
     std::cerr<<"[Line"<<line<<"] Error"<<where<<":"<<message<<std::endl;

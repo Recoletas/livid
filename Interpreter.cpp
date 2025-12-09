@@ -1,9 +1,19 @@
 #include "Interpreter.h"
+#include "RuntimeError.h"
+#include "livid.h"
 #include <any>
 #include <stdexcept>
-#include "RuntimeError.h"
+#include <iostream>
+#include <sstream>
 
-
+void Interpreter::interpret(std::shared_ptr<Expr> expression){
+    try{
+        std::any value =evaluate(expression);
+        std::cout<<stringify(value);
+    }catch(RuntimeError error){
+        Livid::runtimeError(error);
+    }
+}
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
     return expr->value;
 }
@@ -86,6 +96,27 @@ bool Interpreter::isEqual(const std::any& a,const std::any& b){
         return std::any_cast<std::string>(a) == std::any_cast<std::string>(b);
     }
     return false;
+}
+std::string Interpreter::stringify(std::any obj){
+    if(!obj.has_value()) return "nil";
+
+    if(obj.type()==typeid(bool)){
+        return std::any_cast<bool>(obj)?"true":"false";
+    }
+
+    if(obj.type()==typeid(double)){
+        double number =std::any_cast<double>(obj);
+        std::string text=std::to_string(number);
+
+        if(text.length()>2&&text.substr(text.length()-2)==".0"){
+            text=text.substr(0,text.length()-2);
+        }
+        return text;
+    }
+    if(obj.type()==typeid(std::string)){
+        return std::any_cast<std::string>(obj);
+    }
+    return "<Unknown object>";
 }
 std::any Interpreter::evaluate(std::shared_ptr<Expr> expr){
     return expr->accept(*this);
