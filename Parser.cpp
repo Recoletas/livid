@@ -1,13 +1,15 @@
 #include "Parser.h"
+#include "./h/Stmt.h"
 
 Parser::Parser(std::vector<Token> tokens):tokens(std::move(tokens)){}
 
-std::shared_ptr<Expr> Parser::parse(){
-    try{
-        return expression();
-    }catch (ParseError error){
-        return nullptr;
+std::vector<std::shared_ptr<Stmt>> Parser::parse(){
+    std::vector<std::shared_ptr<Stmt>> statements;
+    while (!isAtEnd())
+    {
+        statements.push_back(statement());
     }
+    return statements;
 }
 
 Parser::ParseError::ParseError(const std::string&msg): message(msg){}
@@ -64,6 +66,21 @@ Token Parser::previous(){
 }
 std::shared_ptr<Expr> Parser::expression(){
     return equality();
+}
+std::shared_ptr<Stmt> Parser::statement(){
+    if(match(TokenType::PRINT)) return printStatement();
+
+    return expressionStatement();
+}
+std::shared_ptr<Stmt> Parser::printStatement(){
+    std::shared_ptr<Expr> value=expression();
+    consume(TokenType::SEMICOLON,"Expect ';' after value.");
+    return std::make_shared<Print>(value);
+}
+std::shared_ptr<Stmt> Parser::expressionStatement(){
+    std::shared_ptr<Expr> expr=expression();
+    consume(TokenType::SEMICOLON,"Expect ';' after expression.");
+    return std::make_shared<Expression>(expr);
 }
 std::shared_ptr<Expr> Parser::equality(){
     std::shared_ptr<Expr> expr = comparision();

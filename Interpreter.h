@@ -1,14 +1,15 @@
 #include "./h/Expr.h"
+#include "./h/Stmt.h"
 #include <any>
 #include <stdexcept>
 #include <string>
 
-class Interpreter:public ExprVisitor{
+class Interpreter:public ExprVisitor,public StmtVisitor{
     public:
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
         std::any visitGroupingExpr(std::shared_ptr<Grouping> expr);
         std::any visitBinaryExpr(std::shared_ptr<Binary> expr);
-        void interpret(std::shared_ptr<Expr> expression);
+        void interpret(std::vector<std::shared_ptr<Stmt>> statements);
     private:
         void checkNumberOperand(Token op,std::any operand);
         void checkNumberOperands(Token op,std::any left,std::any right);
@@ -17,4 +18,5 @@ class Interpreter:public ExprVisitor{
         std::any evaluate(std::shared_ptr<Expr> expr);
         std::any visitUnaryExpr(std::shared_ptr<Unary> expr);
         bool isTruthy(std::any& obj);
+        void execute( std::shared_ptr<Stmt> stmt);
 };

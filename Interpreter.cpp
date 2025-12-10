@@ -6,13 +6,17 @@
 #include <iostream>
 #include <sstream>
 
-void Interpreter::interpret(std::shared_ptr<Expr> expression){
+void Interpreter:: interpret(std::vector<std::shared_ptr<Stmt>> statements){
     try{
-        std::any value =evaluate(expression);
-        std::cout<<stringify(value);
+        for( std::shared_ptr<Stmt> statement:statements){
+            execute(statement);
+        }
     }catch(RuntimeError error){
         Livid::runtimeError(error);
     }
+}
+void Interpreter::execute( std::shared_ptr<Stmt> stmt){
+    stmt->accept(*this);
 }
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
     return expr->value;
