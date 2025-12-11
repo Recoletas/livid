@@ -4,12 +4,13 @@
 #include <memory>
 #include <vector>
 #include <any>
-#include "../Token.h"
+#include "Token.h"
 
 class Binary;
 class Grouping;
 class Literal;
 class Unary;
+class Variable;
 
 // Visitor 
 class ExprVisitor {
@@ -20,6 +21,7 @@ public:
     virtual std::any visitGroupingExpr(std::shared_ptr<Grouping> expr) = 0;
     virtual std::any visitLiteralExpr(std::shared_ptr<Literal> expr) = 0;
     virtual std::any visitUnaryExpr(std::shared_ptr<Unary> expr) = 0;
+    virtual std::any visitVariableExpr(std::shared_ptr<Variable> expr) = 0;
 };
 
 class Expr {
@@ -84,6 +86,20 @@ public:
 
     std::any accept(ExprVisitor& visitor) override {
         return visitor.visitUnaryExpr(shared_from_this());
+    }
+};
+
+class Variable : public Expr,
+                                 public std::enable_shared_from_this<Variable> {
+public:
+    Variable(Token name)
+        : name(name) {}
+
+    // 字段
+    Token name;
+
+    std::any accept(ExprVisitor& visitor) override {
+        return visitor.visitVariableExpr(shared_from_this());
     }
 };
 

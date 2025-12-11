@@ -115,13 +115,17 @@ int main(int argc,char* argv[]){
         {"Expr","Binary",{{"std::shared_ptr<Expr>","left"},{"Token","op"},{"std::shared_ptr<Expr>","right"}}},
         {"Expr","Grouping",{{"std::shared_ptr<Expr>","expression"}}},
         {"Expr","Literal",{{"std::any","value"}}},
-        {"Expr","Unary",{{"Token","op"},{"std::shared_ptr<Expr>","right"}}}
+        {"Expr","Unary",{{"Token","op"},{"std::shared_ptr<Expr>","right"}}},
+        {"Expr","Variable",{{"Token","name"}}}
     };
-    //defineAst(outputDir,"Expr",exprTypes);
+    defineAst(outputDir,"Expr",exprTypes);
     std::vector<AstType> stmtTypes={
         {"Stmt","Expression",{{"std::shared_ptr<Expr>","expression"}}},
 
-        {"Stmt","Print",{{"std::shared_ptr<Expr>","expression"}}}
+        {"Stmt","Print",{{"std::shared_ptr<Expr>","expression"}}},
+
+        {"Stmt","Var",{{"Token","name"},{"std::shared_ptr<Expr>","initializer"}}}
+
     };
     defineAst(outputDir,"Stmt",stmtTypes);
     return 0;

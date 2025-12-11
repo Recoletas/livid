@@ -7,7 +7,7 @@ std::vector<std::shared_ptr<Stmt>> Parser::parse(){
     std::vector<std::shared_ptr<Stmt>> statements;
     while (!isAtEnd())
     {
-        statements.push_back(statement());
+        statements.push_back(declaration());
     }
     return statements;
 }
@@ -67,6 +67,16 @@ Token Parser::previous(){
 std::shared_ptr<Expr> Parser::expression(){
     return equality();
 }
+std::shared_ptr<Stmt> Parser::declaration(){
+    try{
+        if(match(TokenType::VAR)) return varDeclaration();
+
+        return statement();
+    }catch(ParseError error){
+        synchronize();
+        return nullptr;
+    }
+}
 std::shared_ptr<Stmt> Parser::statement(){
     if(match(TokenType::PRINT)) return printStatement();
 
@@ -76,6 +86,17 @@ std::shared_ptr<Stmt> Parser::printStatement(){
     std::shared_ptr<Expr> value=expression();
     consume(TokenType::SEMICOLON,"Expect ';' after value.");
     return std::make_shared<Print>(value);
+}
+std::shared_ptr<Stmt> Parser::varDeclaration(){
+    Token name =consume(TokenType::IDENTIFIER,"Expect variable name.");
+
+    std::shared_ptr<Expr> initializer=nullptr;
+    if(match(TokenType::EQUAL)){
+        initializer=expression();
+    }
+
+    consume(TokenType::SEMICOLON,"Expect ';' after variable declaration.");
+    return std::make_shared<Var>(name,initializer);
 }
 std::shared_ptr<Stmt> Parser::expressionStatement(){
     std::shared_ptr<Expr> expr=expression();

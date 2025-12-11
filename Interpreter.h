@@ -7,8 +7,8 @@
 class Interpreter:public ExprVisitor,public StmtVisitor{
     public:
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
-        std::any visitGroupingExpr(std::shared_ptr<Grouping> expr);
-        std::any visitBinaryExpr(std::shared_ptr<Binary> expr);
+        std::any visitGroupingExpr(std::shared_ptr<Grouping> expr)override;
+        std::any visitBinaryExpr(std::shared_ptr<Binary> expr)override;
         void interpret(std::vector<std::shared_ptr<Stmt>> statements);
     private:
         void checkNumberOperand(Token op,std::any operand);
@@ -16,7 +16,7 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         bool isEqual(const std::any& a,const std::any& b);
         std::string stringify(std::any obj);
         std::any evaluate(std::shared_ptr<Expr> expr);
-        std::any visitUnaryExpr(std::shared_ptr<Unary> expr);
+        std::any visitUnaryExpr(std::shared_ptr<Unary> expr)override;
         bool isTruthy(std::any& obj);
         void execute( std::shared_ptr<Stmt> stmt);
 };

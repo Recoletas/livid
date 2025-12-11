@@ -4,11 +4,11 @@
 #include <memory>
 #include <vector>
 #include <any>
-#include "../Token.h"
-#include "Expr.h"
+#include "Token.h"
 
 class Expression;
 class Print;
+class Var;
 
 // Visitor 
 class StmtVisitor {
@@ -17,6 +17,7 @@ public:
 
     virtual std::any visitExpressionStmt(std::shared_ptr<Expression> stmt) = 0;
     virtual std::any visitPrintStmt(std::shared_ptr<Print> stmt) = 0;
+    virtual std::any visitVarStmt(std::shared_ptr<Var> stmt) = 0;
 };
 
 class Stmt {
@@ -50,6 +51,21 @@ public:
 
     std::any accept(StmtVisitor& visitor) override {
         return visitor.visitPrintStmt(shared_from_this());
+    }
+};
+
+class Var : public Stmt,
+                                 public std::enable_shared_from_this<Var> {
+public:
+    Var(Token name, std::shared_ptr<Expr> initializer)
+        : name(name), initializer(initializer) {}
+
+    // 字段
+    Token name;
+    std::shared_ptr<Expr> initializer;
+
+    std::any accept(StmtVisitor& visitor) override {
+        return visitor.visitVarStmt(shared_from_this());
     }
 };
 

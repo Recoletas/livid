@@ -46,11 +46,10 @@ void Livid::run(const std::string &source){
     Scanner scanner(source);
     std::vector<Token> tokens=scanner.scanTokens();
     Parser parser(tokens);
-    std::shared_ptr<Expr> expression=parser.parse();
+    std::vector<std::shared_ptr<Stmt>> statements=parser.parse();
 
     if(hadError) return;
-    AstPrinter printer;
-    std::cout<<printer.print(expression)<<std::endl;
+    interpreter.interpret(statements);
 
 }
 void Livid::error(int line,const std::string& message){
@@ -62,7 +61,6 @@ void Livid::runtimeError(const RuntimeError& error){
     std::cerr<<error.what()<<"\n[ line "<<error.token.getline()<<"]"<<std::endl;
     Livid::hadRuntimeError =true;
 }
-const Interpreter Livid::interpreter=Interpreter();
 
 void Livid::report(int line,const std::string &where,const std::string &message){
     std::cerr<<"[Line"<<line<<"] Error"<<where<<":"<<message<<std::endl;

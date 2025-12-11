@@ -7,7 +7,7 @@
 class Livid {
 private:
     static inline bool hadError = false;
-    static const Interpreter interpreter ;
+    static inline Interpreter interpreter;
 public:
     static bool hadRuntimeError;
     static void Livid::runtimeError(const RuntimeError& error);
