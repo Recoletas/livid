@@ -125,6 +125,21 @@ std::string Interpreter::stringify(std::any obj){
 std::any Interpreter::evaluate(std::shared_ptr<Expr> expr){
     return expr->accept(*this);
 }
+void Interpreter::visitExpressionStmt(std::shared_ptr<Expression> stmt){
+    evaluate(stmt->expression);
+}
+void Interpreter::visitPrintStmt(std::shared_ptr<Print> stmt){
+    std::any value = evaluate(stmt->expression);
+    std::cout<<stringify(value);
+}
+void Interpreter::visitVarStmt(std::shared_ptr<Var> stmt){
+    std::any value={};
+    if(stmt->initializer!=nullptr){
+        value=evaluate(stmt->initializer);
+    }
+
+    environment.define(stmt->name.getLexeme(),value);
+}
 std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
     std::any right =evaluate(expr->right);
     switch (expr->op.getType())
@@ -138,6 +153,9 @@ std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
         return !isTruthy(right);
     }
     return std::any{};
+}
+std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
+    return environment.get(expr->name);
 }
 bool Interpreter::isTruthy(std::any& obj){
     if(!obj.has_value()) return false;

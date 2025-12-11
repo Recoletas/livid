@@ -3,6 +3,7 @@
 #include <any>
 #include <stdexcept>
 #include <string>
+#include "Environment.h"
 
 class Interpreter:public ExprVisitor,public StmtVisitor{
     public:
@@ -10,7 +11,12 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         std::any visitGroupingExpr(std::shared_ptr<Grouping> expr)override;
         std::any visitBinaryExpr(std::shared_ptr<Binary> expr)override;
         void interpret(std::vector<std::shared_ptr<Stmt>> statements);
+        void visitExpressionStmt(std::shared_ptr<Expression> stmt)override;
+        void visitPrintStmt(std::shared_ptr<Print> stmt)override;
+        void visitVarStmt(std::shared_ptr<Var> stmt)override;
+        std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;
     private:
+        Environment environment;
         void checkNumberOperand(Token op,std::any operand);
         void checkNumberOperands(Token op,std::any left,std::any right);
         bool isEqual(const std::any& a,const std::any& b);

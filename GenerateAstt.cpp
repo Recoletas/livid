@@ -46,15 +46,20 @@ void defineAst(const std::string& outputDir,const std::string &baseName,const st
     writer << "    virtual ~" << baseName << "Visitor() = default;\n\n";
     
     for (const auto& type : types) {
-        writer << "    virtual std::any visit" << type.className << baseName 
+        std::string returnType=(baseName=="Expr")?"std::any":"void";
+
+        writer << "    virtual "<<returnType<<" visit"<< type.className << baseName 
                << "(std::shared_ptr<" << type.className << "> " << toLower(baseName) << ") = 0;\n";
     }
     writer << "};\n\n";
     
+    
     writer << "class " << baseName << " {\n";
     writer << "public:\n";
     writer << "    virtual ~" << baseName << "() = default;\n";
-    writer << "    virtual std::any accept(" << baseName << "Visitor& visitor) = 0;\n";
+    
+    std::string baseReturnType=(baseName=="Expr")?"std::any":"void";
+    writer << "    virtual "<<baseReturnType<<" accept(" << baseName << "Visitor& visitor) = 0;\n";
     writer << "};\n\n";
     
     // 生成各个子类
@@ -89,7 +94,8 @@ void defineAst(const std::string& outputDir,const std::string &baseName,const st
         writer << "\n";
         
         // accept 方法
-        writer << "    std::any accept(" << baseName << "Visitor& visitor) override {\n";
+        std::string returnType=(baseName=="Expr")?"std::any":"void";
+        writer <<"    "<<returnType <<" accept(" << baseName << "Visitor& visitor) override {\n";
         writer << "        return visitor.visit" << type.className << baseName 
                << "(shared_from_this());\n";
         writer << "    }\n";

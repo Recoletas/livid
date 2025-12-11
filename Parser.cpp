@@ -156,6 +156,10 @@ std::shared_ptr<Expr> Parser::primary(){
         return std::make_shared<Literal>(previous().getLiteral());
     }
 
+    if (match(TokenType::IDENTIFIER)) {
+      return std::make_shared<Expr> (Variable(previous()));
+    }
+
     if(match(TokenType::LEFT_PAREN)){
         std::shared_ptr<Expr> expr =expression();
         consume(TokenType::RIGHT_PAREN,"Expect ')' after expression.");

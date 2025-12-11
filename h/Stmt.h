@@ -15,15 +15,15 @@ class StmtVisitor {
 public:
     virtual ~StmtVisitor() = default;
 
-    virtual std::any visitExpressionStmt(std::shared_ptr<Expression> stmt) = 0;
-    virtual std::any visitPrintStmt(std::shared_ptr<Print> stmt) = 0;
-    virtual std::any visitVarStmt(std::shared_ptr<Var> stmt) = 0;
+    virtual void visitExpressionStmt(std::shared_ptr<Expression> stmt) = 0;
+    virtual void visitPrintStmt(std::shared_ptr<Print> stmt) = 0;
+    virtual void visitVarStmt(std::shared_ptr<Var> stmt) = 0;
 };
 
 class Stmt {
 public:
     virtual ~Stmt() = default;
-    virtual std::any accept(StmtVisitor& visitor) = 0;
+    virtual void accept(StmtVisitor& visitor) = 0;
 };
 
 class Expression : public Stmt,
@@ -35,7 +35,7 @@ public:
     // 字段
     std::shared_ptr<Expr> expression;
 
-    std::any accept(StmtVisitor& visitor) override {
+    void accept(StmtVisitor& visitor) override {
         return visitor.visitExpressionStmt(shared_from_this());
     }
 };
@@ -49,7 +49,7 @@ public:
     // 字段
     std::shared_ptr<Expr> expression;
 
-    std::any accept(StmtVisitor& visitor) override {
+    void accept(StmtVisitor& visitor) override {
         return visitor.visitPrintStmt(shared_from_this());
     }
 };
@@ -64,7 +64,7 @@ public:
     Token name;
     std::shared_ptr<Expr> initializer;
 
-    std::any accept(StmtVisitor& visitor) override {
+    void accept(StmtVisitor& visitor) override {
         return visitor.visitVarStmt(shared_from_this());
     }
 };
