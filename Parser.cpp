@@ -65,7 +65,7 @@ Token Parser::previous(){
     return tokens[current-1];
 }
 std::shared_ptr<Expr> Parser::expression(){
-    return equality();
+    return assignment();
 }
 std::shared_ptr<Stmt> Parser::declaration(){
     try{
@@ -102,6 +102,26 @@ std::shared_ptr<Stmt> Parser::expressionStatement(){
     std::shared_ptr<Expr> expr=expression();
     consume(TokenType::SEMICOLON,"Expect ';' after expression.");
     return std::make_shared<Expression>(expr);
+}
+std::shared_ptr<Expr> Parser::assignment(){
+    std::shared_ptr<Expr> expr=equality();
+
+    if(match(TokenType::EQUAL)){
+        Token equals=previous();
+        std::shared_ptr<Expr> value=assignment();
+
+        //指针向下转型
+        std::shared_ptr<Variable> Variable_expr =std::dynamic_pointer_cast<Variable>(expr);
+
+        if(Variable_expr!= nullptr){
+            Token name =Variable_expr->name;
+            return std::make_shared<Assign>(name,value);
+        }
+
+        error(equals,"Invalid assignment target.");
+    }
+
+    return expr;
 }
 std::shared_ptr<Expr> Parser::equality(){
     std::shared_ptr<Expr> expr = comparision();

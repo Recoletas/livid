@@ -13,3 +13,14 @@ std::any Environment::get(const Token& name){
 
     throw RuntimeError(name,"Undefined variable '"+name.getLexeme()+"'.");
 }
+void Environment::assign(const Token& name,const std::any& value){
+    if(values.count(name.getLexeme())){
+        values[name.getLexeme()]=value;
+        return ;
+    }
+    if(enclosing!=nullptr){
+        enclosing->assign(name,value);
+        return;
+    }
+    throw RuntimeError(name,"Undefined variable assign '"+name.getLexeme()+"'.");
+}

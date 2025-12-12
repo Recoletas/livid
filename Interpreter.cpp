@@ -140,6 +140,11 @@ void Interpreter::visitVarStmt(std::shared_ptr<Var> stmt){
 
     environment.define(stmt->name.getLexeme(),value);
 }
+std::any Interpreter::visitAssignExpr(std::shared_ptr<Assign> expr){
+    std::any value = evaluate(expr->value);
+    environment.assign(expr->name,value);
+    return value;
+}
 std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
     std::any right =evaluate(expr->right);
     switch (expr->op.getType())

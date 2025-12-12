@@ -118,6 +118,7 @@ int main(int argc,char* argv[]){
     std::string outputDir =argv[1];
 
     std::vector<AstType> exprTypes ={
+        {"Expr","Assign",{{"Token","name"},{"std::shared_ptr<Expr>","value"}}},
         {"Expr","Binary",{{"std::shared_ptr<Expr>","left"},{"Token","op"},{"std::shared_ptr<Expr>","right"}}},
         {"Expr","Grouping",{{"std::shared_ptr<Expr>","expression"}}},
         {"Expr","Literal",{{"std::any","value"}}},
