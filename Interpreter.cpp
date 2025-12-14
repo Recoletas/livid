@@ -48,7 +48,7 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
     switch (expr->op.getType())
     {
         case TokenType::BANG_EQUAL:return !isEqual(left,right);
-        case TokenType::EQUAL_EQUAL:return !isEqual(left,right);
+        case TokenType::EQUAL_EQUAL:return isEqual(left,right);
         case TokenType::GREATER:{
             checkNumberOperands(expr->op,left,right);
             return std::any_cast<double>(left)>std::any_cast<double>(right);
@@ -70,7 +70,7 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
         }
         case TokenType::PLUS:{
             if(left.type()==typeid(double)&&right.type()==typeid(double)){
-                return std::any_cast<double>(left)-std::any_cast<double>(right);
+                return std::any_cast<double>(left)+std::any_cast<double>(right);
             }
             
             if(left.type()==typeid(std::string)&&right.type()==typeid(std::string)){
@@ -147,7 +147,7 @@ void Interpreter::visitExpressionStmt(std::shared_ptr<Expression> stmt){
 }
 void Interpreter::visitPrintStmt(std::shared_ptr<Print> stmt){
     std::any value = evaluate(stmt->expression);
-    std::cout<<stringify(value);
+    std::cout<<stringify(value)<<std::endl;
 }
 void Interpreter::visitVarStmt(std::shared_ptr<Var> stmt){
     std::any value={};
