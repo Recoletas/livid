@@ -16,6 +16,8 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         void visitVarStmt(std::shared_ptr<Var> stmt)override;
         std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;
         std::any visitAssignExpr(std::shared_ptr<Assign> expr)override;
+        void visitBlockStmt(std::shared_ptr<Block>)override;
+        void executeBlock(std::vector<std::shared_ptr<Stmt>> statements,Environment environment);
     private:
         Environment environment;
         void checkNumberOperand(Token op,std::any operand);

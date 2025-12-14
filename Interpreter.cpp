@@ -18,6 +18,23 @@ void Interpreter:: interpret(std::vector<std::shared_ptr<Stmt>> statements){
 void Interpreter::execute( std::shared_ptr<Stmt> stmt){
     stmt->accept(*this);
 }
+void Interpreter::executeBlock(std::vector<std::shared_ptr<Stmt>> statements,Environment environment){
+    Environment previous = this->environment;
+    try{
+        this->environment=environment;
+        for(std::shared_ptr<Stmt> statement:statements){
+            execute(statement);
+        }
+        this->environment=previous;
+    }catch(...){
+        this->environment=previous;
+        throw;
+    }
+}
+void Interpreter::visitBlockStmt(std::shared_ptr<Block> stmt){
+    executeBlock(stmt->statements,Environment(environment));
+    return ;
+}
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
     return expr->value;
 }

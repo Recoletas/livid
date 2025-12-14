@@ -6,6 +6,7 @@
 #include <any>
 #include "Token.h"
 
+class Block;
 class Expression;
 class Print;
 class Var;
@@ -15,6 +16,7 @@ class StmtVisitor {
 public:
     virtual ~StmtVisitor() = default;
 
+    virtual void visitBlockStmt(std::shared_ptr<Block> stmt) = 0;
     virtual void visitExpressionStmt(std::shared_ptr<Expression> stmt) = 0;
     virtual void visitPrintStmt(std::shared_ptr<Print> stmt) = 0;
     virtual void visitVarStmt(std::shared_ptr<Var> stmt) = 0;
@@ -24,6 +26,20 @@ class Stmt {
 public:
     virtual ~Stmt() = default;
     virtual void accept(StmtVisitor& visitor) = 0;
+};
+
+class Block : public Stmt,
+                                 public std::enable_shared_from_this<Block> {
+public:
+    Block(std::vector<std::shared_ptr<Stmt>> statements)
+        : statements(statements) {}
+
+    // 字段
+    std::vector<std::shared_ptr<Stmt>> statements;
+
+    void accept(StmtVisitor& visitor) override {
+        return visitor.visitBlockStmt(shared_from_this());
+    }
 };
 
 class Expression : public Stmt,

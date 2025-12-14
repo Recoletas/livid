@@ -79,6 +79,7 @@ std::shared_ptr<Stmt> Parser::declaration(){
 }
 std::shared_ptr<Stmt> Parser::statement(){
     if(match(TokenType::PRINT)) return printStatement();
+    if(match(TokenType::LEFT_BRACE)) return std::make_shared<Block>(block());
 
     return expressionStatement();
 }
@@ -102,6 +103,16 @@ std::shared_ptr<Stmt> Parser::expressionStatement(){
     std::shared_ptr<Expr> expr=expression();
     consume(TokenType::SEMICOLON,"Expect ';' after expression.");
     return std::make_shared<Expression>(expr);
+}
+std::vector <std::shared_ptr<Stmt>> Parser::block(){
+    std::vector<std::shared_ptr<Stmt>>statements;
+
+    while(!check(TokenType::RIGHT_BRACE)&&!isAtEnd()){
+        statements.push_back(declaration());
+    }
+
+    consume(TokenType::RIGHT_BRACE,"Except ')' after block.");
+    return statements;
 }
 std::shared_ptr<Expr> Parser::assignment(){
     std::shared_ptr<Expr> expr=equality();

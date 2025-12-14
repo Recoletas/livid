@@ -47,6 +47,7 @@ class Parser{
         std::shared_ptr<Stmt> declaration();
         std::shared_ptr<Stmt> Parser::varDeclaration();
         std::shared_ptr<Expr> assignment();
+        std::vector<std::shared_ptr<Stmt>> block();
 };
 template<typename... TokenTypes>
 bool Parser::match(TokenTypes... types){

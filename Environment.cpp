@@ -11,6 +11,8 @@ std::any Environment::get(const Token& name){
         return values.at(key);
     }
 
+    if(enclosing!=nullptr) return enclosing->get(name);
+
     throw RuntimeError(name,"Undefined variable '"+name.getLexeme()+"'.");
 }
 void Environment::assign(const Token& name,const std::any& value){

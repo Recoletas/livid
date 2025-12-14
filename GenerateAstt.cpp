@@ -127,6 +127,8 @@ int main(int argc,char* argv[]){
     };
     defineAst(outputDir,"Expr",exprTypes);
     std::vector<AstType> stmtTypes={
+        {"Stmt","Block",{{"std::vector<std::shared_ptr<Stmt>>","statements"}}},
+
         {"Stmt","Expression",{{"std::shared_ptr<Expr>","expression"}}},
 
         {"Stmt","Print",{{"std::shared_ptr<Expr>","expression"}}},
