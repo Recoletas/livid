@@ -3,10 +3,10 @@
 
 #include "TokenType.h"
 #include "Token.h"
-#include "./h/Expr.h"
-#include "livid.h"
+#include "ast/Expr.h"
+#include "core/livid.h"
 #include <vector>
-#include "./h/Stmt.h"
+#include "ast/Stmt.h"
 
 class Parser{
     public:

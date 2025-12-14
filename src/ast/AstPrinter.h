@@ -1,7 +1,7 @@
 #ifndef AST_PRINTER_H
 #define AST_PRINTER_H
 
-#include "./h/Expr.h"
+#include "ast/Expr.h"
 #include <string>
 #include <memory>
 #include <sstream>

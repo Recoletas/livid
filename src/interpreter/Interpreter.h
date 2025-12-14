@@ -1,12 +1,12 @@
 #ifndef INTERPRETER_H 
 #define INTERPRETER_H
 
-#include "./h/Expr.h"
-#include "./h/Stmt.h"
+#include "ast/Expr.h"
+#include "ast/Stmt.h"
 #include <any>
 #include <stdexcept>
 #include <string>
-#include "Environment.h"
+#include "environment/Environment.h"
 
 class Interpreter:public ExprVisitor,public StmtVisitor{
     public:

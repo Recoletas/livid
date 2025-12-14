@@ -19,11 +19,17 @@ set(SOURCE_FILES
     Environment.cpp
 )
 
+file(GLOB_RECURSE SOURCE_FILES "src/*.cpp" "src/*/*.cpp")
+
 # 编译生成可执行文件 livid
 # 确保所有 .cpp 文件都在这里
 add_executable(livid ${SOURCE_FILES})
 
 target_include_directories(livid PUBLIC
-    ${PROJECT_SOURCE_DIR}       # Livid 根目录 (for Token.h, Interpreter.h, Parser.h, etc.)
-    ${PROJECT_SOURCE_DIR}/h     # h 子目录 (for Expr.h, Stmt.h)
+    ${PROJECT_SOURCE_DIR}/src/ast
+    ${PROJECT_SOURCE_DIR}/src/core
+    ${PROJECT_SOURCE_DIR}/src/interpreter
+    ${PROJECT_SOURCE_DIR}/src/parser
+    ${PROJECT_SOURCE_DIR}/src/scanner
+    ${PROJECT_SOURCE_DIR}/src/environment
 )

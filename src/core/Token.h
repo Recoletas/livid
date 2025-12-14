@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include <any>
-#include "TokenType.h"
+#include "core/TokenType.h"
 
 class Token{
     private:

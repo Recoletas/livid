@@ -1,6 +1,6 @@
-#include "Interpreter.h"
-#include "RuntimeError.h"
-#include "livid.h"
+#include "interpreter/Interpreter.h"
+#include "core/RuntimeError.h"
+#include "core/livid.h"
 #include <any>
 #include <stdexcept>
 #include <iostream>

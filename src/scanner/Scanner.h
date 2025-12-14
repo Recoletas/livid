@@ -2,7 +2,7 @@
 #define SCANNER_H
 
 #include "Token.h"
-#include "livid.h"
+#include "core/livid.h"
 #include <variant>
 #include <unordered_map>
 #include <vector>

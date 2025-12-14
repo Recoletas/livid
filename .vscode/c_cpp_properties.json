@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+
+                "${workspaceFolder}/src/ast", 
+                "${workspaceFolder}/src/core", 
+                "${workspaceFolder}/src/interpreter",
+                "${workspaceFolder}/src/parser",
+                "${workspaceFolder}/src/scanner",
+                "${workspaceFolder}/src/environment"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

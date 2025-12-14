@@ -2,8 +2,8 @@
 #define LIVID_H
 
 #include <string>
-#include "Interpreter.h"
-#include "RuntimeError.h"
+#include "interpreter/Interpreter.h"
+#include "core/RuntimeError.h"
 
 class Livid {
 private:

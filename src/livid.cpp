@@ -2,7 +2,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <vector>
-#include "Scanner.h"
+#include "scanner/Scanner.h"
 #include "Token.h"
 #include "livid.h"
 #include "Parser.h"

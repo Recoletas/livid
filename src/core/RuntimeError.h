@@ -2,7 +2,7 @@
 #define RUNTIMEERROR_H
 
 #include <stdexcept>
-#include "Token.h"
+#include "core/Token.h"
 #include <string>
 
 class RuntimeError :public std::runtime_error{
