@@ -9,7 +9,10 @@
 #include "AstPrinter.h"
 #include "RuntimeError.h"
 
+bool Livid::isReplMode =false;
+
 void Livid::runFile(const std::string& filename){
+    Livid::setReplMode(false);
     try{
         std::ifstream file(filename);
         if(!file.is_open()){
@@ -27,6 +30,7 @@ void Livid::runFile(const std::string& filename){
 }
     
 void Livid::runPrompt(){
+    Livid::setReplMode(true);
     std::cout<<"Livid interactive mode(Ctrl+D to exit)"<<std::endl;
     std::string line;
     while(true){
@@ -40,6 +44,7 @@ void Livid::runPrompt(){
             hadError=false;
         }
     }
+    Livid::setReplMode(false);
 }
 
 void Livid::run(const std::string &source){

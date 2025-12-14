@@ -81,7 +81,7 @@ std::shared_ptr<Stmt> Parser::statement(){
     if(match(TokenType::PRINT)) return printStatement();
     if(match(TokenType::LEFT_BRACE)) return std::make_shared<Block>(block());
 
-    return expressionStatement();
+    return expressionOrPrintStatement();
 }
 std::shared_ptr<Stmt> Parser::printStatement(){
     std::shared_ptr<Expr> value=expression();
@@ -99,10 +99,17 @@ std::shared_ptr<Stmt> Parser::varDeclaration(){
     consume(TokenType::SEMICOLON,"Expect ';' after variable declaration.");
     return std::make_shared<Var>(name,initializer);
 }
-std::shared_ptr<Stmt> Parser::expressionStatement(){
+std::shared_ptr<Stmt> Parser::expressionOrPrintStatement(){
     std::shared_ptr<Expr> expr=expression();
-    consume(TokenType::SEMICOLON,"Expect ';' after expression.");
-    return std::make_shared<Expression>(expr);
+    if(match(TokenType::SEMICOLON)){
+        return std::make_shared<Expression>(expr);
+    }
+    if(Livid::getReplMode()){
+        return std::make_shared<Print>(expr);
+    }else{
+        throw error(previous(), "Expect ';' after expression.");
+    }
+    
 }
 std::vector <std::shared_ptr<Stmt>> Parser::block(){
     std::vector<std::shared_ptr<Stmt>>statements;

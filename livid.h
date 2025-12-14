@@ -7,6 +7,7 @@
 
 class Livid {
 private:
+    static bool isReplMode;
     static inline bool hadError = false;
     static inline Interpreter interpreter;
 public:
@@ -17,8 +18,10 @@ public:
     static void run(const std::string &source);
     static void error(int line, const std::string& message);
     static void report(int line, const std::string& where, const std::string& message);
-    
+
+    static void setReplMode(bool mode){isReplMode=mode;}
     static bool hadErrorOccurred() { return hadError; }
+    static bool getReplMode() { return isReplMode; }
 };
 
 #endif

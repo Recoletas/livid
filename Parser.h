@@ -18,7 +18,7 @@ class Parser{
 
         std::shared_ptr<Stmt> statement();
         std::shared_ptr<Stmt> printStatement();
-        std::shared_ptr<Stmt> expressionStatement();
+        std::shared_ptr<Stmt> expressionOrPrintStatement();
 
         class ParseError :public std::exception{
             private:
