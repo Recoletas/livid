@@ -45,7 +45,7 @@ class Parser{
         std::shared_ptr<Expr> unary();
         std::shared_ptr<Expr> primary();
         std::shared_ptr<Stmt> declaration();
-        std::shared_ptr<Stmt> Parser::varDeclaration();
+        std::shared_ptr<Stmt> varDeclaration();
         std::shared_ptr<Expr> assignment();
         std::vector<std::shared_ptr<Stmt>> block();
 };

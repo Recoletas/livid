@@ -1,3 +1,6 @@
+#ifndef INTERPRETER_H 
+#define INTERPRETER_H
+
 #include "./h/Expr.h"
 #include "./h/Stmt.h"
 #include <any>
@@ -29,3 +32,5 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         bool isTruthy(std::any& obj);
         void execute( std::shared_ptr<Stmt> stmt);
 };
+
+#endif

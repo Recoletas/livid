@@ -1,0 +1,3 @@
+/home/recoletas/Livid/build/CMakeFiles/livid.dir
+/home/recoletas/Livid/build/CMakeFiles/edit_cache.dir
+/home/recoletas/Livid/build/CMakeFiles/rebuild_cache.dir

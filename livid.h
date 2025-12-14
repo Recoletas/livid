@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Interpreter.h"
+#include "RuntimeError.h"
 
 class Livid {
 private:
@@ -10,7 +11,7 @@ private:
     static inline Interpreter interpreter;
 public:
     static bool hadRuntimeError;
-    static void Livid::runtimeError(const RuntimeError& error);
+    static void runtimeError(const RuntimeError& error);
     static void runFile(const std::string& filename);
     static void runPrompt();
     static void run(const std::string &source);

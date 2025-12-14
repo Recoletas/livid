@@ -188,7 +188,7 @@ std::shared_ptr<Expr> Parser::primary(){
     }
 
     if (match(TokenType::IDENTIFIER)) {
-      return std::make_shared<Expr> (Variable(previous()));
+      return std::make_shared<Variable> (previous());
     }
 
     if(match(TokenType::LEFT_PAREN)){

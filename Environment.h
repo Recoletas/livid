@@ -1,3 +1,6 @@
+#ifndef ENVIRONMENT_H 
+#define ENVIRONMENT_H
+
 #include <string>
 #include <unordered_map>
 #include <any>
@@ -19,3 +22,5 @@ class Environment:public std::enable_shared_from_this<Environment> {
         std::shared_ptr<Environment> enclosing;
 
 };
+
+#endif
