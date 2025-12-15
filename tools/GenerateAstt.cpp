@@ -32,7 +32,7 @@ void defineAst(const std::string& outputDir,const std::string &baseName,const st
     writer << "#include <memory>\n";
     writer << "#include <vector>\n";
     writer << "#include <any>\n";
-    writer << "#include \"Token.h\"\n\n";
+    writer << "#include \"core/Token.h\"\n\n";
     
     for (const auto& type : types) {
         writer << "class " << type.className << ";\n";
@@ -130,6 +130,8 @@ int main(int argc,char* argv[]){
         {"Stmt","Block",{{"std::vector<std::shared_ptr<Stmt>>","statements"}}},
 
         {"Stmt","Expression",{{"std::shared_ptr<Expr>","expression"}}},
+
+        {"Stmt","If",{{"std::shared_ptr<Expr>","condition"},{"std::shared_ptr<Stmt>","thenBranch"},{"std::shared_ptr<Stmt>","elseBranch"}}},
 
         {"Stmt","Print",{{"std::shared_ptr<Expr>","expression"}}},
 

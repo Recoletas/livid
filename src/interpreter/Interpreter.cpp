@@ -145,6 +145,14 @@ std::any Interpreter::evaluate(std::shared_ptr<Expr> expr){
 void Interpreter::visitExpressionStmt(std::shared_ptr<Expression> stmt){
     evaluate(stmt->expression);
 }
+void Interpreter::visitIfStmt(std::shared_ptr<If> stmt){
+    std::any conditionValue = evaluate(stmt->condition);
+    if(isTruthy(conditionValue)){
+        execute(stmt->thenBranch);
+    }else if(stmt->elseBranch != nullptr){
+        execute(stmt->elseBranch);
+    }
+}
 void Interpreter::visitPrintStmt(std::shared_ptr<Print> stmt){
     std::any value = evaluate(stmt->expression);
     std::cout<<stringify(value)<<std::endl;
