@@ -38,6 +38,17 @@ void Interpreter::visitBlockStmt(std::shared_ptr<Block> stmt){
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
     return expr->value;
 }
+std::any Interpreter::visitLogicalExpr(std::shared_ptr<Logical> expr){
+    std::any left=evaluate(expr->left);
+
+    if(expr->op.getType()==TokenType::OR){
+        if(isTruthy(left)) return left;
+    }else{
+        if(!isTruthy(left)) return left;
+    }
+
+    return evaluate(expr->right);
+}
 std::any Interpreter::visitGroupingExpr(std::shared_ptr<Grouping> expr){
     return evaluate(expr->expression);
 }

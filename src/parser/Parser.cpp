@@ -136,7 +136,7 @@ std::vector <std::shared_ptr<Stmt>> Parser::block(){
     return statements;
 }
 std::shared_ptr<Expr> Parser::assignment(){
-    std::shared_ptr<Expr> expr=equality();
+    std::shared_ptr<Expr> expr=oor();
 
     if(match(TokenType::EQUAL)){
         Token equals=previous();
@@ -153,6 +153,27 @@ std::shared_ptr<Expr> Parser::assignment(){
         error(equals,"Invalid assignment target.");
     }
 
+    return expr;
+}
+std::shared_ptr<Expr> Parser::oor(){
+    std::shared_ptr<Expr> expr =andd();
+    
+    while(match(TokenType::OR)){
+        Token op=previous();
+        std::shared_ptr<Expr> right=andd();
+        expr=std::make_shared<Logical>(expr,op,right);
+    }
+
+    return expr;
+}
+std::shared_ptr<Expr> Parser::andd(){
+    std::shared_ptr<Expr> expr =equality();
+
+    while(match(TokenType::AND)){
+        Token op=previous();
+        std::shared_ptr<Expr> right=equality();
+        expr =std::make_shared<Logical>(expr,op,right);
+    }
     return expr;
 }
 std::shared_ptr<Expr> Parser::equality(){

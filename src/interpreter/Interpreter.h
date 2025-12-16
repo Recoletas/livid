@@ -11,6 +11,7 @@
 class Interpreter:public ExprVisitor,public StmtVisitor{
     public:
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
+        std::any visitLogicalExpr(std::shared_ptr<Logical> expr)override;
         std::any visitGroupingExpr(std::shared_ptr<Grouping> expr)override;
         std::any visitBinaryExpr(std::shared_ptr<Binary> expr)override;
         void interpret(std::vector<std::shared_ptr<Stmt>> statements);

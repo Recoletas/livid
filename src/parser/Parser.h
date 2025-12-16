@@ -17,6 +17,8 @@ class Parser{
         int current =0;
 
         std::shared_ptr<Stmt> statement();
+        std::shared_ptr<Expr> oor();
+        std::shared_ptr<Expr> andd();
         std::shared_ptr<Stmt> ifStatement();
         std::shared_ptr<Stmt> printStatement();
         std::shared_ptr<Stmt> expressionOrPrintStatement();
