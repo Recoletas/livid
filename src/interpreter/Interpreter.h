@@ -19,6 +19,7 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         void visitIfStmt(std::shared_ptr<If> stmt)override;
         void visitPrintStmt(std::shared_ptr<Print> stmt)override;
         void visitVarStmt(std::shared_ptr<Var> stmt)override;
+        void visitWhileStmt(std::shared_ptr<While> stmt)override;
         std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;
         std::any visitAssignExpr(std::shared_ptr<Assign> expr)override;
         void visitBlockStmt(std::shared_ptr<Block>)override;

@@ -11,6 +11,7 @@ class Expression;
 class If;
 class Print;
 class Var;
+class While;
 
 // Visitor 
 class StmtVisitor {
@@ -22,6 +23,7 @@ public:
     virtual void visitIfStmt(std::shared_ptr<If> stmt) = 0;
     virtual void visitPrintStmt(std::shared_ptr<Print> stmt) = 0;
     virtual void visitVarStmt(std::shared_ptr<Var> stmt) = 0;
+    virtual void visitWhileStmt(std::shared_ptr<While> stmt) = 0;
 };
 
 class Stmt {
@@ -100,6 +102,21 @@ public:
 
     void accept(StmtVisitor& visitor) override {
         return visitor.visitVarStmt(shared_from_this());
+    }
+};
+
+class While : public Stmt,
+                                 public std::enable_shared_from_this<While> {
+public:
+    While(std::shared_ptr<Expr> condition, std::shared_ptr<Stmt> body)
+        : condition(condition), body(body) {}
+
+    // 字段
+    std::shared_ptr<Expr> condition;
+    std::shared_ptr<Stmt> body;
+
+    void accept(StmtVisitor& visitor) override {
+        return visitor.visitWhileStmt(shared_from_this());
     }
 };
 

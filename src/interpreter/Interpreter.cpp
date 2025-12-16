@@ -176,6 +176,12 @@ void Interpreter::visitVarStmt(std::shared_ptr<Var> stmt){
 
     environment.define(stmt->name.getLexeme(),value);
 }
+void Interpreter::visitWhileStmt(std::shared_ptr<While> stmt){
+    std::any va=evaluate(stmt->condition);
+    while(isTruthy(va)){
+        execute(stmt->body);
+    }
+}
 std::any Interpreter::visitAssignExpr(std::shared_ptr<Assign> expr){
     std::any value = evaluate(expr->value);
     environment.assign(expr->name,value);
