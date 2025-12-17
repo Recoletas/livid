@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/recoletas/Livid -I/home/recoletas/Livid/h
+CXX_INCLUDES = -I/home/recoletas/Livid/src -I/home/recoletas/Livid/src/ast -I/home/recoletas/Livid/src/core -I/home/recoletas/Livid/src/interpreter -I/home/recoletas/Livid/src/parser -I/home/recoletas/Livid/src/scanner -I/home/recoletas/Livid/src/environment
 
 CXX_FLAGS = -std=gnu++17
 

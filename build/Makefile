@@ -129,149 +129,149 @@ livid/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/build
 .PHONY : livid/fast
 
-Environment.o: Environment.cpp.o
-.PHONY : Environment.o
+src/environment/Environment.o: src/environment/Environment.cpp.o
+.PHONY : src/environment/Environment.o
 
 # target to build an object file
-Environment.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Environment.cpp.o
-.PHONY : Environment.cpp.o
+src/environment/Environment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/environment/Environment.cpp.o
+.PHONY : src/environment/Environment.cpp.o
 
-Environment.i: Environment.cpp.i
-.PHONY : Environment.i
+src/environment/Environment.i: src/environment/Environment.cpp.i
+.PHONY : src/environment/Environment.i
 
 # target to preprocess a source file
-Environment.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Environment.cpp.i
-.PHONY : Environment.cpp.i
+src/environment/Environment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/environment/Environment.cpp.i
+.PHONY : src/environment/Environment.cpp.i
 
-Environment.s: Environment.cpp.s
-.PHONY : Environment.s
+src/environment/Environment.s: src/environment/Environment.cpp.s
+.PHONY : src/environment/Environment.s
 
 # target to generate assembly for a file
-Environment.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Environment.cpp.s
-.PHONY : Environment.cpp.s
+src/environment/Environment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/environment/Environment.cpp.s
+.PHONY : src/environment/Environment.cpp.s
 
-Interpreter.o: Interpreter.cpp.o
-.PHONY : Interpreter.o
+src/interpreter/Interpreter.o: src/interpreter/Interpreter.cpp.o
+.PHONY : src/interpreter/Interpreter.o
 
 # target to build an object file
-Interpreter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Interpreter.cpp.o
-.PHONY : Interpreter.cpp.o
+src/interpreter/Interpreter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o
+.PHONY : src/interpreter/Interpreter.cpp.o
 
-Interpreter.i: Interpreter.cpp.i
-.PHONY : Interpreter.i
+src/interpreter/Interpreter.i: src/interpreter/Interpreter.cpp.i
+.PHONY : src/interpreter/Interpreter.i
 
 # target to preprocess a source file
-Interpreter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Interpreter.cpp.i
-.PHONY : Interpreter.cpp.i
+src/interpreter/Interpreter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.i
+.PHONY : src/interpreter/Interpreter.cpp.i
 
-Interpreter.s: Interpreter.cpp.s
-.PHONY : Interpreter.s
+src/interpreter/Interpreter.s: src/interpreter/Interpreter.cpp.s
+.PHONY : src/interpreter/Interpreter.s
 
 # target to generate assembly for a file
-Interpreter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Interpreter.cpp.s
-.PHONY : Interpreter.cpp.s
+src/interpreter/Interpreter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.s
+.PHONY : src/interpreter/Interpreter.cpp.s
 
-Parser.o: Parser.cpp.o
-.PHONY : Parser.o
+src/livid.o: src/livid.cpp.o
+.PHONY : src/livid.o
 
 # target to build an object file
-Parser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Parser.cpp.o
-.PHONY : Parser.cpp.o
+src/livid.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/livid.cpp.o
+.PHONY : src/livid.cpp.o
 
-Parser.i: Parser.cpp.i
-.PHONY : Parser.i
+src/livid.i: src/livid.cpp.i
+.PHONY : src/livid.i
 
 # target to preprocess a source file
-Parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Parser.cpp.i
-.PHONY : Parser.cpp.i
+src/livid.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/livid.cpp.i
+.PHONY : src/livid.cpp.i
 
-Parser.s: Parser.cpp.s
-.PHONY : Parser.s
+src/livid.s: src/livid.cpp.s
+.PHONY : src/livid.s
 
 # target to generate assembly for a file
-Parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Parser.cpp.s
-.PHONY : Parser.cpp.s
+src/livid.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/livid.cpp.s
+.PHONY : src/livid.cpp.s
 
-Scanner.o: Scanner.cpp.o
-.PHONY : Scanner.o
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
 
 # target to build an object file
-Scanner.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Scanner.cpp.o
-.PHONY : Scanner.cpp.o
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-Scanner.i: Scanner.cpp.i
-.PHONY : Scanner.i
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-Scanner.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Scanner.cpp.i
-.PHONY : Scanner.cpp.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-Scanner.s: Scanner.cpp.s
-.PHONY : Scanner.s
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-Scanner.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/Scanner.cpp.s
-.PHONY : Scanner.cpp.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
-livid.o: livid.cpp.o
-.PHONY : livid.o
+src/parser/Parser.o: src/parser/Parser.cpp.o
+.PHONY : src/parser/Parser.o
 
 # target to build an object file
-livid.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/livid.cpp.o
-.PHONY : livid.cpp.o
+src/parser/Parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/parser/Parser.cpp.o
+.PHONY : src/parser/Parser.cpp.o
 
-livid.i: livid.cpp.i
-.PHONY : livid.i
+src/parser/Parser.i: src/parser/Parser.cpp.i
+.PHONY : src/parser/Parser.i
 
 # target to preprocess a source file
-livid.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/livid.cpp.i
-.PHONY : livid.cpp.i
+src/parser/Parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/parser/Parser.cpp.i
+.PHONY : src/parser/Parser.cpp.i
 
-livid.s: livid.cpp.s
-.PHONY : livid.s
+src/parser/Parser.s: src/parser/Parser.cpp.s
+.PHONY : src/parser/Parser.s
 
 # target to generate assembly for a file
-livid.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/livid.cpp.s
-.PHONY : livid.cpp.s
+src/parser/Parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/parser/Parser.cpp.s
+.PHONY : src/parser/Parser.cpp.s
 
-main.o: main.cpp.o
-.PHONY : main.o
+src/scanner/Scanner.o: src/scanner/Scanner.cpp.o
+.PHONY : src/scanner/Scanner.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/scanner/Scanner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o
+.PHONY : src/scanner/Scanner.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+src/scanner/Scanner.i: src/scanner/Scanner.cpp.i
+.PHONY : src/scanner/Scanner.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/scanner/Scanner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/scanner/Scanner.cpp.i
+.PHONY : src/scanner/Scanner.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+src/scanner/Scanner.s: src/scanner/Scanner.cpp.s
+.PHONY : src/scanner/Scanner.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/scanner/Scanner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/scanner/Scanner.cpp.s
+.PHONY : src/scanner/Scanner.cpp.s
 
 # Help Target
 help:
@@ -282,24 +282,24 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... livid"
-	@echo "... Environment.o"
-	@echo "... Environment.i"
-	@echo "... Environment.s"
-	@echo "... Interpreter.o"
-	@echo "... Interpreter.i"
-	@echo "... Interpreter.s"
-	@echo "... Parser.o"
-	@echo "... Parser.i"
-	@echo "... Parser.s"
-	@echo "... Scanner.o"
-	@echo "... Scanner.i"
-	@echo "... Scanner.s"
-	@echo "... livid.o"
-	@echo "... livid.i"
-	@echo "... livid.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/environment/Environment.o"
+	@echo "... src/environment/Environment.i"
+	@echo "... src/environment/Environment.s"
+	@echo "... src/interpreter/Interpreter.o"
+	@echo "... src/interpreter/Interpreter.i"
+	@echo "... src/interpreter/Interpreter.s"
+	@echo "... src/livid.o"
+	@echo "... src/livid.i"
+	@echo "... src/livid.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/parser/Parser.o"
+	@echo "... src/parser/Parser.i"
+	@echo "... src/parser/Parser.s"
+	@echo "... src/scanner/Scanner.o"
+	@echo "... src/scanner/Scanner.i"
+	@echo "... src/scanner/Scanner.s"
 .PHONY : help
 
 

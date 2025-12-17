@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 
+
 void Interpreter:: interpret(std::vector<std::shared_ptr<Stmt>> statements){
     try{
         for( std::shared_ptr<Stmt> statement:statements){
@@ -18,8 +19,8 @@ void Interpreter:: interpret(std::vector<std::shared_ptr<Stmt>> statements){
 void Interpreter::execute( std::shared_ptr<Stmt> stmt){
     stmt->accept(*this);
 }
-void Interpreter::executeBlock(std::vector<std::shared_ptr<Stmt>> statements,Environment environment){
-    Environment previous = this->environment;
+void Interpreter::executeBlock(std::vector<std::shared_ptr<Stmt>> statements,std::shared_ptr<Environment> environment){
+    std::shared_ptr<Environment> previous = this->environment;
     try{
         this->environment=environment;
         for(std::shared_ptr<Stmt> statement:statements){
@@ -30,10 +31,11 @@ void Interpreter::executeBlock(std::vector<std::shared_ptr<Stmt>> statements,Env
         this->environment=previous;
         throw;
     }
+    this->environment = previous;
 }
 void Interpreter::visitBlockStmt(std::shared_ptr<Block> stmt){
-    executeBlock(stmt->statements,Environment(environment));
-    return ;
+    auto newEnv=std::make_shared<Environment>(this->environment);
+    executeBlock(stmt->statements,newEnv);
 }
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
     return expr->value;
@@ -71,7 +73,8 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
         case TokenType::LESS:{
             checkNumberOperands(expr->op,left,right);
             return std::any_cast<double>(left)<std::any_cast<double>(right);
-            case TokenType::LESS_EQUAL:
+        }
+        case TokenType::LESS_EQUAL:{
             checkNumberOperands(expr->op,left,right);
             return std::any_cast<double>(left)<=std::any_cast<double>(right); 
         }   
@@ -174,17 +177,16 @@ void Interpreter::visitVarStmt(std::shared_ptr<Var> stmt){
         value=evaluate(stmt->initializer);
     }
 
-    environment.define(stmt->name.getLexeme(),value);
+    environment->define(stmt->name.getLexeme(),value);
 }
 void Interpreter::visitWhileStmt(std::shared_ptr<While> stmt){
-    std::any va=evaluate(stmt->condition);
-    while(isTruthy(va)){
+    while(isTruthy(evaluate(stmt->condition))){
         execute(stmt->body);
     }
 }
 std::any Interpreter::visitAssignExpr(std::shared_ptr<Assign> expr){
     std::any value = evaluate(expr->value);
-    environment.assign(expr->name,value);
+    environment->assign(expr->name,value);
     return value;
 }
 std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
@@ -202,12 +204,12 @@ std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
     return std::any{};
 }
 std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
-    return environment.get(expr->name);
+    return environment->get(expr->name);
 }
-bool Interpreter::isTruthy(std::any& obj){
+bool Interpreter::isTruthy(const std::any& obj){
     if(!obj.has_value()) return false;
     if(obj.type()==typeid(bool)){
-        //for may problems
+        //for problems may exist
         try{
             return std::any_cast<bool>(obj);
         }catch(const std::bad_any_cast&e){

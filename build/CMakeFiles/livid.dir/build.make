@@ -69,108 +69,108 @@ include CMakeFiles/livid.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/livid.dir/flags.make
 
-CMakeFiles/livid.dir/Interpreter.cpp.o: CMakeFiles/livid.dir/flags.make
-CMakeFiles/livid.dir/Interpreter.cpp.o: /home/recoletas/Livid/Interpreter.cpp
-CMakeFiles/livid.dir/Interpreter.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/livid.dir/Interpreter.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/Interpreter.cpp.o -MF CMakeFiles/livid.dir/Interpreter.cpp.o.d -o CMakeFiles/livid.dir/Interpreter.cpp.o -c /home/recoletas/Livid/Interpreter.cpp
+CMakeFiles/livid.dir/src/environment/Environment.cpp.o: CMakeFiles/livid.dir/flags.make
+CMakeFiles/livid.dir/src/environment/Environment.cpp.o: /home/recoletas/Livid/src/environment/Environment.cpp
+CMakeFiles/livid.dir/src/environment/Environment.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/livid.dir/src/environment/Environment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/src/environment/Environment.cpp.o -MF CMakeFiles/livid.dir/src/environment/Environment.cpp.o.d -o CMakeFiles/livid.dir/src/environment/Environment.cpp.o -c /home/recoletas/Livid/src/environment/Environment.cpp
 
-CMakeFiles/livid.dir/Interpreter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/Interpreter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/Interpreter.cpp > CMakeFiles/livid.dir/Interpreter.cpp.i
+CMakeFiles/livid.dir/src/environment/Environment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/src/environment/Environment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/src/environment/Environment.cpp > CMakeFiles/livid.dir/src/environment/Environment.cpp.i
 
-CMakeFiles/livid.dir/Interpreter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/Interpreter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/Interpreter.cpp -o CMakeFiles/livid.dir/Interpreter.cpp.s
+CMakeFiles/livid.dir/src/environment/Environment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/src/environment/Environment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/src/environment/Environment.cpp -o CMakeFiles/livid.dir/src/environment/Environment.cpp.s
 
-CMakeFiles/livid.dir/livid.cpp.o: CMakeFiles/livid.dir/flags.make
-CMakeFiles/livid.dir/livid.cpp.o: /home/recoletas/Livid/livid.cpp
-CMakeFiles/livid.dir/livid.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/livid.dir/livid.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/livid.cpp.o -MF CMakeFiles/livid.dir/livid.cpp.o.d -o CMakeFiles/livid.dir/livid.cpp.o -c /home/recoletas/Livid/livid.cpp
+CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o: CMakeFiles/livid.dir/flags.make
+CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o: /home/recoletas/Livid/src/interpreter/Interpreter.cpp
+CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o -MF CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o.d -o CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o -c /home/recoletas/Livid/src/interpreter/Interpreter.cpp
 
-CMakeFiles/livid.dir/livid.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/livid.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/livid.cpp > CMakeFiles/livid.dir/livid.cpp.i
+CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/src/interpreter/Interpreter.cpp > CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.i
 
-CMakeFiles/livid.dir/livid.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/livid.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/livid.cpp -o CMakeFiles/livid.dir/livid.cpp.s
+CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/src/interpreter/Interpreter.cpp -o CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.s
 
-CMakeFiles/livid.dir/main.cpp.o: CMakeFiles/livid.dir/flags.make
-CMakeFiles/livid.dir/main.cpp.o: /home/recoletas/Livid/main.cpp
-CMakeFiles/livid.dir/main.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/livid.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/main.cpp.o -MF CMakeFiles/livid.dir/main.cpp.o.d -o CMakeFiles/livid.dir/main.cpp.o -c /home/recoletas/Livid/main.cpp
+CMakeFiles/livid.dir/src/livid.cpp.o: CMakeFiles/livid.dir/flags.make
+CMakeFiles/livid.dir/src/livid.cpp.o: /home/recoletas/Livid/src/livid.cpp
+CMakeFiles/livid.dir/src/livid.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/livid.dir/src/livid.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/src/livid.cpp.o -MF CMakeFiles/livid.dir/src/livid.cpp.o.d -o CMakeFiles/livid.dir/src/livid.cpp.o -c /home/recoletas/Livid/src/livid.cpp
 
-CMakeFiles/livid.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/main.cpp > CMakeFiles/livid.dir/main.cpp.i
+CMakeFiles/livid.dir/src/livid.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/src/livid.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/src/livid.cpp > CMakeFiles/livid.dir/src/livid.cpp.i
 
-CMakeFiles/livid.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/main.cpp -o CMakeFiles/livid.dir/main.cpp.s
+CMakeFiles/livid.dir/src/livid.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/src/livid.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/src/livid.cpp -o CMakeFiles/livid.dir/src/livid.cpp.s
 
-CMakeFiles/livid.dir/Parser.cpp.o: CMakeFiles/livid.dir/flags.make
-CMakeFiles/livid.dir/Parser.cpp.o: /home/recoletas/Livid/Parser.cpp
-CMakeFiles/livid.dir/Parser.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/livid.dir/Parser.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/Parser.cpp.o -MF CMakeFiles/livid.dir/Parser.cpp.o.d -o CMakeFiles/livid.dir/Parser.cpp.o -c /home/recoletas/Livid/Parser.cpp
+CMakeFiles/livid.dir/src/main.cpp.o: CMakeFiles/livid.dir/flags.make
+CMakeFiles/livid.dir/src/main.cpp.o: /home/recoletas/Livid/src/main.cpp
+CMakeFiles/livid.dir/src/main.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/livid.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/src/main.cpp.o -MF CMakeFiles/livid.dir/src/main.cpp.o.d -o CMakeFiles/livid.dir/src/main.cpp.o -c /home/recoletas/Livid/src/main.cpp
 
-CMakeFiles/livid.dir/Parser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/Parser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/Parser.cpp > CMakeFiles/livid.dir/Parser.cpp.i
+CMakeFiles/livid.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/src/main.cpp > CMakeFiles/livid.dir/src/main.cpp.i
 
-CMakeFiles/livid.dir/Parser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/Parser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/Parser.cpp -o CMakeFiles/livid.dir/Parser.cpp.s
+CMakeFiles/livid.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/src/main.cpp -o CMakeFiles/livid.dir/src/main.cpp.s
 
-CMakeFiles/livid.dir/Scanner.cpp.o: CMakeFiles/livid.dir/flags.make
-CMakeFiles/livid.dir/Scanner.cpp.o: /home/recoletas/Livid/Scanner.cpp
-CMakeFiles/livid.dir/Scanner.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/livid.dir/Scanner.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/Scanner.cpp.o -MF CMakeFiles/livid.dir/Scanner.cpp.o.d -o CMakeFiles/livid.dir/Scanner.cpp.o -c /home/recoletas/Livid/Scanner.cpp
+CMakeFiles/livid.dir/src/parser/Parser.cpp.o: CMakeFiles/livid.dir/flags.make
+CMakeFiles/livid.dir/src/parser/Parser.cpp.o: /home/recoletas/Livid/src/parser/Parser.cpp
+CMakeFiles/livid.dir/src/parser/Parser.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/livid.dir/src/parser/Parser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/src/parser/Parser.cpp.o -MF CMakeFiles/livid.dir/src/parser/Parser.cpp.o.d -o CMakeFiles/livid.dir/src/parser/Parser.cpp.o -c /home/recoletas/Livid/src/parser/Parser.cpp
 
-CMakeFiles/livid.dir/Scanner.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/Scanner.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/Scanner.cpp > CMakeFiles/livid.dir/Scanner.cpp.i
+CMakeFiles/livid.dir/src/parser/Parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/src/parser/Parser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/src/parser/Parser.cpp > CMakeFiles/livid.dir/src/parser/Parser.cpp.i
 
-CMakeFiles/livid.dir/Scanner.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/Scanner.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/Scanner.cpp -o CMakeFiles/livid.dir/Scanner.cpp.s
+CMakeFiles/livid.dir/src/parser/Parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/src/parser/Parser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/src/parser/Parser.cpp -o CMakeFiles/livid.dir/src/parser/Parser.cpp.s
 
-CMakeFiles/livid.dir/Environment.cpp.o: CMakeFiles/livid.dir/flags.make
-CMakeFiles/livid.dir/Environment.cpp.o: /home/recoletas/Livid/Environment.cpp
-CMakeFiles/livid.dir/Environment.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/livid.dir/Environment.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/Environment.cpp.o -MF CMakeFiles/livid.dir/Environment.cpp.o.d -o CMakeFiles/livid.dir/Environment.cpp.o -c /home/recoletas/Livid/Environment.cpp
+CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o: CMakeFiles/livid.dir/flags.make
+CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o: /home/recoletas/Livid/src/scanner/Scanner.cpp
+CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o: CMakeFiles/livid.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o -MF CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o.d -o CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o -c /home/recoletas/Livid/src/scanner/Scanner.cpp
 
-CMakeFiles/livid.dir/Environment.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/Environment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/Environment.cpp > CMakeFiles/livid.dir/Environment.cpp.i
+CMakeFiles/livid.dir/src/scanner/Scanner.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/livid.dir/src/scanner/Scanner.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/recoletas/Livid/src/scanner/Scanner.cpp > CMakeFiles/livid.dir/src/scanner/Scanner.cpp.i
 
-CMakeFiles/livid.dir/Environment.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/Environment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/Environment.cpp -o CMakeFiles/livid.dir/Environment.cpp.s
+CMakeFiles/livid.dir/src/scanner/Scanner.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/livid.dir/src/scanner/Scanner.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/recoletas/Livid/src/scanner/Scanner.cpp -o CMakeFiles/livid.dir/src/scanner/Scanner.cpp.s
 
 # Object files for target livid
 livid_OBJECTS = \
-"CMakeFiles/livid.dir/Interpreter.cpp.o" \
-"CMakeFiles/livid.dir/livid.cpp.o" \
-"CMakeFiles/livid.dir/main.cpp.o" \
-"CMakeFiles/livid.dir/Parser.cpp.o" \
-"CMakeFiles/livid.dir/Scanner.cpp.o" \
-"CMakeFiles/livid.dir/Environment.cpp.o"
+"CMakeFiles/livid.dir/src/environment/Environment.cpp.o" \
+"CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o" \
+"CMakeFiles/livid.dir/src/livid.cpp.o" \
+"CMakeFiles/livid.dir/src/main.cpp.o" \
+"CMakeFiles/livid.dir/src/parser/Parser.cpp.o" \
+"CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o"
 
 # External object files for target livid
 livid_EXTERNAL_OBJECTS =
 
-livid: CMakeFiles/livid.dir/Interpreter.cpp.o
-livid: CMakeFiles/livid.dir/livid.cpp.o
-livid: CMakeFiles/livid.dir/main.cpp.o
-livid: CMakeFiles/livid.dir/Parser.cpp.o
-livid: CMakeFiles/livid.dir/Scanner.cpp.o
-livid: CMakeFiles/livid.dir/Environment.cpp.o
+livid: CMakeFiles/livid.dir/src/environment/Environment.cpp.o
+livid: CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o
+livid: CMakeFiles/livid.dir/src/livid.cpp.o
+livid: CMakeFiles/livid.dir/src/main.cpp.o
+livid: CMakeFiles/livid.dir/src/parser/Parser.cpp.o
+livid: CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o
 livid: CMakeFiles/livid.dir/build.make
 livid: CMakeFiles/livid.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable livid"

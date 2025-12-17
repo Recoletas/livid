@@ -10,6 +10,7 @@
 
 class Interpreter:public ExprVisitor,public StmtVisitor{
     public:
+        Interpreter() : environment(std::make_shared<Environment>()){};
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
         std::any visitLogicalExpr(std::shared_ptr<Logical> expr)override;
         std::any visitGroupingExpr(std::shared_ptr<Grouping> expr)override;
@@ -23,16 +24,16 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;
         std::any visitAssignExpr(std::shared_ptr<Assign> expr)override;
         void visitBlockStmt(std::shared_ptr<Block>)override;
-        void executeBlock(std::vector<std::shared_ptr<Stmt>> statements,Environment environment);
+        void executeBlock(std::vector<std::shared_ptr<Stmt>> statements,std::shared_ptr<Environment> environment);
     private:
-        Environment environment;
+        std::shared_ptr<Environment> environment;
         void checkNumberOperand(Token op,std::any operand);
         void checkNumberOperands(Token op,std::any left,std::any right);
         bool isEqual(const std::any& a,const std::any& b);
         std::string stringify(std::any obj);
         std::any evaluate(std::shared_ptr<Expr> expr);
         std::any visitUnaryExpr(std::shared_ptr<Unary> expr)override;
-        bool isTruthy(std::any& obj);
+        bool isTruthy(const std::any& obj);
         void execute( std::shared_ptr<Stmt> stmt);
 };
 

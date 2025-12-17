@@ -26,6 +26,7 @@ file(GLOB_RECURSE SOURCE_FILES "src/*.cpp" "src/*/*.cpp")
 add_executable(livid ${SOURCE_FILES})
 
 target_include_directories(livid PUBLIC
+    ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/src/ast
     ${PROJECT_SOURCE_DIR}/src/core
     ${PROJECT_SOURCE_DIR}/src/interpreter

@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/recoletas/Livid/Environment.cpp" "CMakeFiles/livid.dir/Environment.cpp.o" "gcc" "CMakeFiles/livid.dir/Environment.cpp.o.d"
-  "/home/recoletas/Livid/Interpreter.cpp" "CMakeFiles/livid.dir/Interpreter.cpp.o" "gcc" "CMakeFiles/livid.dir/Interpreter.cpp.o.d"
-  "/home/recoletas/Livid/Parser.cpp" "CMakeFiles/livid.dir/Parser.cpp.o" "gcc" "CMakeFiles/livid.dir/Parser.cpp.o.d"
-  "/home/recoletas/Livid/Scanner.cpp" "CMakeFiles/livid.dir/Scanner.cpp.o" "gcc" "CMakeFiles/livid.dir/Scanner.cpp.o.d"
-  "/home/recoletas/Livid/livid.cpp" "CMakeFiles/livid.dir/livid.cpp.o" "gcc" "CMakeFiles/livid.dir/livid.cpp.o.d"
-  "/home/recoletas/Livid/main.cpp" "CMakeFiles/livid.dir/main.cpp.o" "gcc" "CMakeFiles/livid.dir/main.cpp.o.d"
+  "/home/recoletas/Livid/src/environment/Environment.cpp" "CMakeFiles/livid.dir/src/environment/Environment.cpp.o" "gcc" "CMakeFiles/livid.dir/src/environment/Environment.cpp.o.d"
+  "/home/recoletas/Livid/src/interpreter/Interpreter.cpp" "CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o" "gcc" "CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o.d"
+  "/home/recoletas/Livid/src/livid.cpp" "CMakeFiles/livid.dir/src/livid.cpp.o" "gcc" "CMakeFiles/livid.dir/src/livid.cpp.o.d"
+  "/home/recoletas/Livid/src/main.cpp" "CMakeFiles/livid.dir/src/main.cpp.o" "gcc" "CMakeFiles/livid.dir/src/main.cpp.o.d"
+  "/home/recoletas/Livid/src/parser/Parser.cpp" "CMakeFiles/livid.dir/src/parser/Parser.cpp.o" "gcc" "CMakeFiles/livid.dir/src/parser/Parser.cpp.o.d"
+  "/home/recoletas/Livid/src/scanner/Scanner.cpp" "CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o" "gcc" "CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
