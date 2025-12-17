@@ -107,6 +107,14 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
     }
     return nullptr;
 }
+std::any Interpreter::visitCallExpr(std::shared_ptr<Call> expr){
+    std::any callee=evaluate(expr->callee);
+    std::vector<std::any> arguements;
+    for(std::shared_ptr<Expr> arguement:expr->arguments){
+        arguements.push_back(evaluate(arguement));
+    }
+    
+}
 void Interpreter::checkNumberOperands(Token op,std::any left,std::any right){
     if(left.type()==typeid(double)&&right.type()==typeid(double)) return ;
     throw RuntimeError(op,"Operands must be numbers.");
