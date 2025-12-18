@@ -1,4 +1,5 @@
 #include "interpreter/Interpreter.h"
+#include "fun/Callable.h"
 #include "core/RuntimeError.h"
 #include "core/livid.h"
 #include <any>
@@ -6,15 +7,24 @@
 #include <iostream>
 #include <sstream>
 
+#include <chrono>
 
-void Interpreter:: interpret(std::vector<std::shared_ptr<Stmt>> statements){
-    try{
-        for( std::shared_ptr<Stmt> statement:statements){
-            execute(statement);
-        }
-    }catch(RuntimeError error){
-        Livid::runtimeError(error);
+class ClockNative : public Callable {
+public:
+    int arity() override { return 0; }
+
+    std::any call(Interpreter& interpreter, std::vector<std::any> arguments) override {
+        auto now = std::chrono::system_clock::now().time_since_epoch();
+        double seconds = std::chrono::duration<double>(now).count();
+        return seconds;
     }
+
+    std::string toString() override { return "<native fn>"; }
+};
+
+Interpreter:: Interpreter():globals(std::make_shared<Environment>()){
+    environment = globals;
+    globals->define("clock",std::make_shared<ClockNative>());
 }
 void Interpreter::execute( std::shared_ptr<Stmt> stmt){
     stmt->accept(*this);
@@ -114,6 +124,15 @@ std::any Interpreter::visitCallExpr(std::shared_ptr<Call> expr){
         arguements.push_back(evaluate(arguement));
     }
     
+    if(callee.type()!=typeid(std::shared_ptr<Callable>)){
+        throw RuntimeError(expr->paren,"Can only call functions and classes.");
+    }
+    std::shared_ptr<Callable> function = std::any_cast<std::shared_ptr<Callable>>(callee);
+    if(arguements.size()!=function->arity()){
+        throw RuntimeError(expr->paren,"Expected "+std::to_string(function->arity())+
+        " arguments but got "+std::to_string(arguements.size())+".");
+    }
+    return function->call(*this,arguements);
 }
 void Interpreter::checkNumberOperands(Token op,std::any left,std::any right){
     if(left.type()==typeid(double)&&right.type()==typeid(double)) return ;

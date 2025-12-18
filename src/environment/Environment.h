@@ -14,7 +14,7 @@ class Environment:public std::enable_shared_from_this<Environment> {
         std::shared_ptr<Environment> enclosing;
         Environment():enclosing(nullptr){};
         Environment(std::shared_ptr<Environment> enclosing) : enclosing(enclosing) {}
-        void define(const std::string& name,std::any& value);
+        void define(const std::string& name,const std::any& value);
         std::any get(const Token& name);
         void assign(const Token& name,const std::any& value);
         
