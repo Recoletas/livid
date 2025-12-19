@@ -133,6 +133,8 @@ int main(int argc,char* argv[]){
 
         {"Stmt","Expression",{{"std::shared_ptr<Expr>","expression"}}},
 
+        {"Stmt","Function",{{"Token","name"},{"std::vector<Token>","params"},{"std::vector<std::shared_ptr<Stmt>>","body"}}},
+
         {"Stmt","If",{{"std::shared_ptr<Expr>","condition"},{"std::shared_ptr<Stmt>","thenBranch"},{"std::shared_ptr<Stmt>","elseBranch"}}},
 
         {"Stmt","Print",{{"std::shared_ptr<Expr>","expression"}}},

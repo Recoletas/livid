@@ -23,6 +23,7 @@ class Parser{
         std::shared_ptr<Stmt> ifStatement();
         std::shared_ptr<Stmt> printStatement();
         std::shared_ptr<Stmt> expressionOrPrintStatement();
+        std::shared_ptr<Function> function(std::string kind);
 
         class ParseError :public std::exception{
             private:

@@ -1,3 +1,5 @@
+#ifndef  CALLABLE_H
+#define  CALLABLE_H
 #include <any>
 #include <vector>
 #include "interpreter/Interpreter.h"
@@ -9,3 +11,4 @@ class Callable{
         virtual int arity()=0;
         virtual std::string toString()=0;
 };
+#endif

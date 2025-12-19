@@ -8,6 +8,7 @@
 
 class Block;
 class Expression;
+class Function;
 class If;
 class Print;
 class Var;
@@ -20,6 +21,7 @@ public:
 
     virtual void visitBlockStmt(std::shared_ptr<Block> stmt) = 0;
     virtual void visitExpressionStmt(std::shared_ptr<Expression> stmt) = 0;
+    virtual void visitFunctionStmt(std::shared_ptr<Function> stmt) = 0;
     virtual void visitIfStmt(std::shared_ptr<If> stmt) = 0;
     virtual void visitPrintStmt(std::shared_ptr<Print> stmt) = 0;
     virtual void visitVarStmt(std::shared_ptr<Var> stmt) = 0;
@@ -57,6 +59,22 @@ public:
 
     void accept(StmtVisitor& visitor) override {
         return visitor.visitExpressionStmt(shared_from_this());
+    }
+};
+
+class Function : public Stmt,
+                                 public std::enable_shared_from_this<Function> {
+public:
+    Function(Token name, std::vector<Token> params, std::vector<std::shared_ptr<Stmt>> body)
+        : name(name), params(params), body(body) {}
+
+    // 字段
+    Token name;
+    std::vector<Token> params;
+    std::vector<std::shared_ptr<Stmt>> body;
+
+    void accept(StmtVisitor& visitor) override {
+        return visitor.visitFunctionStmt(shared_from_this());
     }
 };
 

@@ -69,6 +69,7 @@ std::shared_ptr<Expr> Parser::expression(){
 }
 std::shared_ptr<Stmt> Parser::declaration(){
     try{
+        if(match(TokenType::FUN)) return function("function");
         if(match(TokenType::VAR)) return varDeclaration();
 
         return statement();
@@ -171,6 +172,25 @@ std::shared_ptr<Stmt> Parser::expressionOrPrintStatement(){
         throw error(previous(), "Expect ';' after expression.");
     }
     
+}
+std::shared_ptr<Function> Parser::function(std::string kind){
+    Token name=consume(TokenType::IDENTIFIER,"Expect "+kind +" name.");
+    consume(TokenType::LEFT_PAREN,"Expect '(' after "+kind+" name.");
+    std::vector<Token> parameters;
+    if(!check(TokenType::RIGHT_PAREN)){
+        do{
+            if(parameters.size()>=255){
+                error(peek(),"Can't have more than 255 parameters.");
+            }
+
+            parameters.push_back(consume(TokenType::IDENTIFIER,"Expect parameter name."));
+        }while (match(TokenType::COMMA));
+    }
+    consume(TokenType::RIGHT_PAREN,"Expect ')' after parameters.");
+
+    consume(TokenType::LEFT_BRACE,"Expect '{' before "+kind+" body.");
+    std::vector<std::shared_ptr<Stmt>> body=block();
+    return std::make_shared<Function>(name,parameters,body);
 }
 std::vector <std::shared_ptr<Stmt>> Parser::block(){
     std::vector<std::shared_ptr<Stmt>>statements;

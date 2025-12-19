@@ -1,7 +1,7 @@
 #include "environment/Environment.h"
 #include "core/RuntimeError.h"
 
-void Environment::define(const std::string& name,std::any& value){
+void Environment::define(const std::string& name,const std::any& value){
     values[name]=value;
 }
 std::any Environment::get(const Token& name){

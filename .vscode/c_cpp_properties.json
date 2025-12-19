@@ -5,12 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
 
-                "${workspaceFolder}/src/ast", 
-                "${workspaceFolder}/src/core", 
-                "${workspaceFolder}/src/interpreter",
-                "${workspaceFolder}/src/parser",
-                "${workspaceFolder}/src/scanner",
-                "${workspaceFolder}/src/environment"
+                "${workspaceFolder}/src"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
