@@ -139,6 +139,8 @@ int main(int argc,char* argv[]){
 
         {"Stmt","Print",{{"std::shared_ptr<Expr>","expression"}}},
 
+        {"Stmt","Return",{{"Token","keyword"},{"std::shared_ptr<Expr>","value"}}},
+
         {"Stmt","Var",{{"Token","name"},{"std::shared_ptr<Expr>","initializer"}}},
 
         {"Stmt","While",{{"std::shared_ptr<Expr>","condition"},{"std::shared_ptr<Stmt>","body"}}}

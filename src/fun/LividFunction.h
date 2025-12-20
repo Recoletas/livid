@@ -11,8 +11,9 @@
 class LividFunction:Callable{
     private:   
         std::shared_ptr<Function> declaration;
-        LividFunction(std::shared_ptr<Function> declaration){this->declaration=declaration;}
+        
     public:
+        LividFunction(std::shared_ptr<Function> declaration){this->declaration=declaration;}
         std::any call(Interpreter& interpreter,std::vector<std::any> arguements)override;
         int arity()override;
         std::string toString()override;
