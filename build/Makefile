@@ -153,6 +153,30 @@ src/environment/Environment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/environment/Environment.cpp.s
 .PHONY : src/environment/Environment.cpp.s
 
+src/fun/LividFunction.o: src/fun/LividFunction.cpp.o
+.PHONY : src/fun/LividFunction.o
+
+# target to build an object file
+src/fun/LividFunction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/fun/LividFunction.cpp.o
+.PHONY : src/fun/LividFunction.cpp.o
+
+src/fun/LividFunction.i: src/fun/LividFunction.cpp.i
+.PHONY : src/fun/LividFunction.i
+
+# target to preprocess a source file
+src/fun/LividFunction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/fun/LividFunction.cpp.i
+.PHONY : src/fun/LividFunction.cpp.i
+
+src/fun/LividFunction.s: src/fun/LividFunction.cpp.s
+.PHONY : src/fun/LividFunction.s
+
+# target to generate assembly for a file
+src/fun/LividFunction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/fun/LividFunction.cpp.s
+.PHONY : src/fun/LividFunction.cpp.s
+
 src/interpreter/Interpreter.o: src/interpreter/Interpreter.cpp.o
 .PHONY : src/interpreter/Interpreter.o
 
@@ -285,6 +309,9 @@ help:
 	@echo "... src/environment/Environment.o"
 	@echo "... src/environment/Environment.i"
 	@echo "... src/environment/Environment.s"
+	@echo "... src/fun/LividFunction.o"
+	@echo "... src/fun/LividFunction.i"
+	@echo "... src/fun/LividFunction.s"
 	@echo "... src/interpreter/Interpreter.o"
 	@echo "... src/interpreter/Interpreter.i"
 	@echo "... src/interpreter/Interpreter.s"

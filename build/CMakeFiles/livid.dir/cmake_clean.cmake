@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/livid.dir/src/environment/Environment.cpp.o"
   "CMakeFiles/livid.dir/src/environment/Environment.cpp.o.d"
+  "CMakeFiles/livid.dir/src/fun/LividFunction.cpp.o"
+  "CMakeFiles/livid.dir/src/fun/LividFunction.cpp.o.d"
   "CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o"
   "CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o.d"
   "CMakeFiles/livid.dir/src/livid.cpp.o"

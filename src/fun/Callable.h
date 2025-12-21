@@ -7,7 +7,7 @@
 class Callable{
     public:
         virtual ~Callable()=default;
-        virtual std::any call(Interpreter& interpreter,std::vector<std::any> arguments);
+        virtual std::any call(Interpreter& interpreter,std::vector<std::any> arguments)=0;
         virtual int arity()=0;
         virtual std::string toString()=0;
 };

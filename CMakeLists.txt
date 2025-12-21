@@ -17,6 +17,7 @@ set(SOURCE_FILES
     Parser.cpp
     Scanner.cpp
     Environment.cpp
+    LividFunction.cpp
 )
 
 file(GLOB_RECURSE SOURCE_FILES "src/*.cpp" "src/*/*.cpp")
@@ -33,4 +34,5 @@ target_include_directories(livid PUBLIC
     ${PROJECT_SOURCE_DIR}/src/parser
     ${PROJECT_SOURCE_DIR}/src/scanner
     ${PROJECT_SOURCE_DIR}/src/environment
+    ${PROJECT_SOURCE_DIR}/src/fun
 )

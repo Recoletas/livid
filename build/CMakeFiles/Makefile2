@@ -81,12 +81,12 @@ clean: CMakeFiles/livid.dir/clean
 CMakeFiles/livid.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target livid"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/recoletas/Livid/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target livid"
 .PHONY : CMakeFiles/livid.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/livid.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/recoletas/Livid/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/recoletas/Livid/build/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/livid.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/recoletas/Livid/build/CMakeFiles 0
 .PHONY : CMakeFiles/livid.dir/rule

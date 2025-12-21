@@ -8,12 +8,14 @@
 #include <any>
 #include <vector>
 
-class LividFunction:Callable{
+class LividFunction:public Callable{
     private:   
         std::shared_ptr<Function> declaration;
+        std::shared_ptr<Environment> closure; // 存储闭包
         
     public:
-        LividFunction(std::shared_ptr<Function> declaration){this->declaration=declaration;}
+        LividFunction(std::shared_ptr<Function> declaration, std::shared_ptr<Environment> closure)
+        {this->declaration=declaration;this->closure=closure;}
         std::any call(Interpreter& interpreter,std::vector<std::any> arguements)override;
         int arity()override;
         std::string toString()override;

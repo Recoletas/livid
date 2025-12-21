@@ -1,6 +1,6 @@
-CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o: \
- /home/recoletas/Livid/src/interpreter/Interpreter.cpp \
- /usr/include/stdc-predef.h \
+CMakeFiles/livid.dir/src/fun/LividFunction.cpp.o: \
+ /home/recoletas/Livid/src/fun/LividFunction.cpp \
+ /usr/include/stdc-predef.h /home/recoletas/Livid/src/fun/LividFunction.h \
  /home/recoletas/Livid/src/interpreter/Interpreter.h \
  /home/recoletas/Livid/src/ast/Expr.h /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/memoryfwd.h \
@@ -186,11 +186,4 @@ CMakeFiles/livid.dir/src/interpreter/Interpreter.cpp.o: \
  /usr/include/c++/13/bits/node_handle.h \
  /usr/include/c++/13/bits/erase_if.h \
  /home/recoletas/Livid/src/fun/Callable.h \
- /home/recoletas/Livid/src/fun/LividFunction.h \
- /home/recoletas/Livid/src/fun/Return.h \
- /home/recoletas/Livid/src/core/RuntimeError.h \
- /home/recoletas/Livid/src/core/livid.h /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/chrono \
- /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
- /usr/include/c++/13/cstdint /usr/include/c++/13/limits \
- /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h
+ /home/recoletas/Livid/src/fun/Return.h

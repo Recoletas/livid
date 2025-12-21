@@ -26,7 +26,16 @@ public:
 
 Interpreter:: Interpreter():globals(std::make_shared<Environment>()){
     environment = globals;
-    globals->define("clock",std::make_shared<ClockNative>());
+    globals->define("clock",std::static_pointer_cast<Callable>(std::make_shared<ClockNative>()));
+}
+void Interpreter::interpret(std::vector<std::shared_ptr<Stmt>> statements) {
+    try {
+        for (const auto& statement : statements) {
+            execute(statement);
+        }
+    } catch (const RuntimeError& error) {
+        Livid::runtimeError(error);
+    }
 }
 void Interpreter::execute( std::shared_ptr<Stmt> stmt){
     stmt->accept(*this);
@@ -121,20 +130,26 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
 }
 std::any Interpreter::visitCallExpr(std::shared_ptr<Call> expr){
     std::any callee=evaluate(expr->callee);
-    std::vector<std::any> arguements;
+    std::vector<std::any> arguments;
     for(std::shared_ptr<Expr> arguement:expr->arguments){
-        arguements.push_back(evaluate(arguement));
+        arguments.push_back(evaluate(arguement));
     }
-    
-    if(callee.type()!=typeid(std::shared_ptr<Callable>)){
+
+    std::shared_ptr<Callable> function;
+    try{
+        function=std::any_cast<std::shared_ptr<Callable>>(callee);
+    }catch(const std::bad_any_cast&){
         throw RuntimeError(expr->paren,"Can only call functions and classes.");
     }
-    std::shared_ptr<Callable> function = std::any_cast<std::shared_ptr<Callable>>(callee);
-    if(arguements.size()!=function->arity()){
-        throw RuntimeError(expr->paren,"Expected "+std::to_string(function->arity())+
-        " arguments but got "+std::to_string(arguements.size())+".");
+    
+    if(function==nullptr){
+        throw RuntimeError(expr->paren,"Can only call functions and classes.");
     }
-    return function->call(*this,arguements);
+    if(arguments.size()!=function->arity()){
+        throw RuntimeError(expr->paren,"Expected "+std::to_string(function->arity())+
+        " arguments but got "+std::to_string(arguments.size())+".");
+    }
+    return function->call(*this,arguments);
 }
 void Interpreter::checkNumberOperands(Token op,std::any left,std::any right){
     if(left.type()==typeid(double)&&right.type()==typeid(double)) return ;
@@ -189,7 +204,8 @@ void Interpreter::visitExpressionStmt(std::shared_ptr<Expression> stmt){
     evaluate(stmt->expression);
 }
 void Interpreter::visitFunctionStmt(std::shared_ptr<Function> stmt){
-    LividFunction function = LividFunction(stmt);
+    auto lividFunc = std::make_shared<LividFunction>(stmt, environment);
+    std::shared_ptr<Callable> function = std::static_pointer_cast<Callable>(lividFunc);
     environment->define(stmt->name.getLexeme(),function);
 }
 void Interpreter::visitIfStmt(std::shared_ptr<If> stmt){

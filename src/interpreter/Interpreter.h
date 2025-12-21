@@ -10,6 +10,8 @@
 
 class Interpreter:public ExprVisitor,public StmtVisitor{
     public:
+        Interpreter();
+        void interpret(std::vector<std::shared_ptr<Stmt>> statements);
         std::shared_ptr<Environment> globals=std::make_shared<Environment>();
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
         std::any visitLogicalExpr(std::shared_ptr<Logical> expr)override;
@@ -28,7 +30,7 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         void visitBlockStmt(std::shared_ptr<Block>)override;
         void executeBlock(std::vector<std::shared_ptr<Stmt>> statements,std::shared_ptr<Environment> environment);
     private:
-        std::shared_ptr<Environment> environment=globals;
+        std::shared_ptr<Environment> environment;
         void checkNumberOperand(Token op,std::any operand);
         void checkNumberOperands(Token op,std::any left,std::any right);
         bool isEqual(const std::any& a,const std::any& b);
