@@ -17,8 +17,10 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         std::any visitBinaryExpr(std::shared_ptr<Binary> expr)override;
         std::any visitCallExpr(std::shared_ptr<Call> expr)override;
         void visitExpressionStmt(std::shared_ptr<Expression> stmt)override;
+        void visitFunctionStmt(std::shared_ptr<Function> stmt)override;
         void visitIfStmt(std::shared_ptr<If> stmt)override;
         void visitPrintStmt(std::shared_ptr<Print> stmt)override;
+        void visitReturnStmt(std::shared_ptr<Return> stmt)override;
         void visitVarStmt(std::shared_ptr<Var> stmt)override;
         void visitWhileStmt(std::shared_ptr<While> stmt)override;
         std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;

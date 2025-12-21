@@ -1,4 +1,5 @@
 #include "fun/LividFunction.h"
+#include "fun/Return.h"
 #include "environment/Environment.h"
 #include "interpreter/Interpreter.h"
 
@@ -8,7 +9,11 @@ std::any LividFunction::call(Interpreter& interpreter,std::vector<std::any> argu
         environment->define(declaration->params[i].getLexeme(),arguements[i]);
     }
 
-    interpreter.executeBlock(declaration->body,environment);
+    try{
+        interpreter.executeBlock(declaration->body,environment);
+    }catch(const ReturnException& returnvalue){
+        return returnvalue.value;
+    }
     return std::any{};
 }
 int LividFunction::arity(){

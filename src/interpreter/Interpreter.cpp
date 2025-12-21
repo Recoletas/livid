@@ -1,5 +1,7 @@
 #include "interpreter/Interpreter.h"
 #include "fun/Callable.h"
+#include "fun/LividFunction.h"
+#include "fun/Return.h"
 #include "core/RuntimeError.h"
 #include "core/livid.h"
 #include <any>
@@ -186,6 +188,10 @@ std::any Interpreter::evaluate(std::shared_ptr<Expr> expr){
 void Interpreter::visitExpressionStmt(std::shared_ptr<Expression> stmt){
     evaluate(stmt->expression);
 }
+void Interpreter::visitFunctionStmt(std::shared_ptr<Function> stmt){
+    LividFunction function = LividFunction(stmt);
+    environment->define(stmt->name.getLexeme(),function);
+}
 void Interpreter::visitIfStmt(std::shared_ptr<If> stmt){
     std::any conditionValue = evaluate(stmt->condition);
     if(isTruthy(conditionValue)){
@@ -197,6 +203,12 @@ void Interpreter::visitIfStmt(std::shared_ptr<If> stmt){
 void Interpreter::visitPrintStmt(std::shared_ptr<Print> stmt){
     std::any value = evaluate(stmt->expression);
     std::cout<<stringify(value)<<std::endl;
+}
+void Interpreter::visitReturnStmt(std::shared_ptr<Return> stmt){
+    std::any value=std::any{};
+    if(stmt->value !=nullptr) value=evaluate(stmt->value);
+
+    throw ReturnException{value};
 }
 void Interpreter::visitVarStmt(std::shared_ptr<Var> stmt){
     std::any value={};
