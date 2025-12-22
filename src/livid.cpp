@@ -60,7 +60,13 @@ void Livid::run(const std::string &source){
 void Livid::error(int line,const std::string& message){
     report(line,"",message);
 }
-
+void Livid::error(Token token,std::string message){
+    if(token.getType()==TokenType::EOF_OF_FILE){
+        report(token.getline()," at end ",message);
+    }else{
+        report(token.getline()," at '"+token.getLexeme()+"'",message);
+    }
+}
 bool Livid::hadRuntimeError=false;
 void Livid::runtimeError(const RuntimeError& error){
     std::cerr<<error.what()<<"\n[ line "<<error.token.getline()<<"]"<<std::endl;

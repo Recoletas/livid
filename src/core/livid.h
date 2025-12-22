@@ -17,6 +17,7 @@ public:
     static void runPrompt();
     static void run(const std::string &source);
     static void error(int line, const std::string& message);
+    static void error(Token token, std::string message);
     static void report(int line, const std::string& where, const std::string& message);
 
     static void setReplMode(bool mode){isReplMode=mode;}
