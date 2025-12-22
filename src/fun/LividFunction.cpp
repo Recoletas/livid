@@ -4,7 +4,7 @@
 #include "interpreter/Interpreter.h"
 
 std::any LividFunction::call(Interpreter& interpreter,std::vector<std::any> arguements){
-    auto environment=std::make_shared<Environment>(interpreter.globals);
+    auto environment=std::make_shared<Environment>(closure);
     for(int i=0;i<declaration->params.size();i++){
         environment->define(declaration->params[i].getLexeme(),arguements[i]);
     }
