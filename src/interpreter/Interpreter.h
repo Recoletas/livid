@@ -29,7 +29,9 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         std::any visitAssignExpr(std::shared_ptr<Assign> expr)override;
         void visitBlockStmt(std::shared_ptr<Block>)override;
         void executeBlock(std::vector<std::shared_ptr<Stmt>> statements,std::shared_ptr<Environment> environment);
+        void resolve(std::shared_ptr<Expr> expr,int depth);
     private:
+        std::unordered_map<std::shared_ptr<Expr>,int> locals; 
         std::shared_ptr<Environment> environment;
         void checkNumberOperand(Token op,std::any operand);
         void checkNumberOperands(Token op,std::any left,std::any right);
@@ -39,6 +41,7 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         std::any visitUnaryExpr(std::shared_ptr<Unary> expr)override;
         bool isTruthy(const std::any& obj);
         void execute( std::shared_ptr<Stmt> stmt);
+        std::any lookUpVariable(Token name, std::shared_ptr<Expr> expr);
 };
 
 #endif

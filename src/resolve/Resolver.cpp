@@ -61,4 +61,72 @@ void Resolver::resolveLocal(std::shared_ptr<Expr> expr,Token name){
             return ;
         }
     }
+}
+std::any Resolver::visitAssignExpr(std::shared_ptr<Assign> expr) {
+    resolve(expr->value);
+    resolveLocal(expr, expr->name);
+    return std::any{};
+}
+void Resolver::visitFunctionStmt(std::shared_ptr<Function> stmt) {
+    declare(stmt->name);
+    define(stmt->name);
+
+    resolveFunction(stmt);
+}
+void Resolver::resolveFunction(std::shared_ptr<Function>  function) {
+    beginScope();
+    for (Token param : function->params) {
+      declare(param);
+      define(param);
+    }
+    resolve(function->body);
+    endScope();
+}
+void Resolver::visitExpressionStmt(std::shared_ptr<Expression> stmt){
+    resolve(stmt->expression);
+}
+void Resolver::visitIfStmt(std::shared_ptr<If> stmt){
+    resolve(stmt->condition);
+    resolve(stmt->thenBranch);
+    if(stmt->elseBranch !=nullptr) resolve(stmt->elseBranch);
+}
+void Resolver::visitPrintStmt(std::shared_ptr<Print> stmt){
+    resolve(stmt->expression);
+}
+void Resolver::visitReturnStmt(std::shared_ptr<Return> stmt){
+    if(stmt->value!=nullptr){
+        resolve(stmt->value);
+    }
+}
+void Resolver::visitWhileStmt(std::shared_ptr<While> stmt){
+    resolve(stmt->condition);
+    resolve(stmt->body);
+}
+std::any Resolver::visitBinaryExpr(std::shared_ptr<Binary> expr){
+    resolve(expr->left);
+    resolve(expr->right);
+    return std::any{};
+}
+std::any Resolver::visitCallExpr(std::shared_ptr<Call> expr){
+    resolve(expr->callee);
+    for(std::shared_ptr<Expr> arguement:expr->arguments){
+        resolve(arguement);
+    }
+    return std::any{};
+}
+std::any Resolver::visitGroupingExpr(std::shared_ptr<Grouping> expr){
+    resolve(expr->expression);
+    return std::any{};
+}
+std::any Resolver::visitLiteralExpr(std::shared_ptr<Literal> expr){
+    return std::any{};
 }   
+std::any Resolver::visitLogicalExpr(std::shared_ptr<Logical> expr){
+    resolve(expr->left);
+    resolve(expr->right);
+    return std::any{};
+}
+std::any Resolver::visitUnaryExpr(std::shared_ptr<Unary> expr){
+    resolve(expr->right);
+    return std::any{};
+}

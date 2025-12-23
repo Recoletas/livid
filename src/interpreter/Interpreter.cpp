@@ -40,6 +40,9 @@ void Interpreter::interpret(std::vector<std::shared_ptr<Stmt>> statements) {
 void Interpreter::execute( std::shared_ptr<Stmt> stmt){
     stmt->accept(*this);
 }
+void Interpreter::resolve(std::shared_ptr<Expr> expr,int depth){
+    locals[expr]=depth;
+}
 void Interpreter::executeBlock(std::vector<std::shared_ptr<Stmt>> statements,std::shared_ptr<Environment> environment){
     std::shared_ptr<Environment> previous = this->environment;
     try{
@@ -259,7 +262,16 @@ std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
     return std::any{};
 }
 std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
-    return environment->get(expr->name);
+    return lookUpVariable(expr->name, expr);
+    
+}
+std::any Interpreter::lookUpVariable(Token name, std::shared_ptr<Expr> expr){
+    int distance=locals[expr];
+    if(distance!=NULL){
+        return environment.getAt(distance,name.getLexeme());
+    }else{
+        return globals.get(name);
+    }
 }
 bool Interpreter::isTruthy(const std::any& obj){
     if(!obj.has_value()) return false;

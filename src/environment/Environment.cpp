@@ -4,6 +4,9 @@
 void Environment::define(const std::string& name,const std::any& value){
     values[name]=value;
 }
+std::any Environment::getAt(int distance,std::string name){
+    return ancestor(distance).value.get(name);
+}
 std::any Environment::get(const Token& name){
     const std::string& key =name.getLexeme();
 
