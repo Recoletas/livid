@@ -8,6 +8,7 @@
 #include "Parser.h"
 #include "AstPrinter.h"
 #include "RuntimeError.h"
+#include "resolve/Resolver.h"
 
 bool Livid::isReplMode =false;
 
@@ -53,6 +54,8 @@ void Livid::run(const std::string &source){
     Parser parser(tokens);
     std::vector<std::shared_ptr<Stmt>> statements=parser.parse();
 
+    Resolver resolver(interpreter);
+    resolver.resolve(statements);
     if(hadError) return;
     interpreter.interpret(statements);
 

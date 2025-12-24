@@ -71,9 +71,11 @@ void Resolver::visitFunctionStmt(std::shared_ptr<Function> stmt) {
     declare(stmt->name);
     define(stmt->name);
 
-    resolveFunction(stmt);
+    resolveFunction(stmt,FunctionType::FUNCTION);
 }
-void Resolver::resolveFunction(std::shared_ptr<Function>  function) {
+void Resolver::resolveFunction(std::shared_ptr<Function>  function,FunctionType type) {
+    FunctionType enclosingFunction =currentFunction;
+    currentFunction=type;
     beginScope();
     for (Token param : function->params) {
       declare(param);
@@ -81,6 +83,7 @@ void Resolver::resolveFunction(std::shared_ptr<Function>  function) {
     }
     resolve(function->body);
     endScope();
+    currentFunction=enclosingFunction;
 }
 void Resolver::visitExpressionStmt(std::shared_ptr<Expression> stmt){
     resolve(stmt->expression);
@@ -94,6 +97,9 @@ void Resolver::visitPrintStmt(std::shared_ptr<Print> stmt){
     resolve(stmt->expression);
 }
 void Resolver::visitReturnStmt(std::shared_ptr<Return> stmt){
+    if(currentFunction==FunctionType::NONE){
+        Livid::error(stmt->keyword,"Can't return from top-level code.");
+    }
     if(stmt->value!=nullptr){
         resolve(stmt->value);
     }

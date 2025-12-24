@@ -9,19 +9,26 @@
 
 class Resolver :public ExprVisitor,public StmtVisitor{
     private:
+        enum class FunctionType{
+            NONE,
+            FUNCTION,
+            METHOD
+        };
+        FunctionType currentFunction =FunctionType::NONE;
         Interpreter interpreter;
         std::vector<std::shared_ptr<std::unordered_map<std::string, bool>>> scopes;
-        void resolve(std::vector<std::shared_ptr<Stmt>> statements);
-        void resolve(std::shared_ptr<Stmt> stmt);
-        void resolve(std::shared_ptr<Expr> expr);
+        
         void beginScope();
         void endScope();
         void declare(Token name);
         void define(Token name);
         void resolveLocal(std::shared_ptr<Expr> expr,Token name);
-        void resolveFunction(std::shared_ptr<Function>  function);
+        void resolveFunction(std::shared_ptr<Function>  function,FunctionType type);
     public:
         Resolver(Interpreter interpreter){this->interpreter=interpreter;}
+        void resolve(std::vector<std::shared_ptr<Stmt>> statements);
+        void resolve(std::shared_ptr<Stmt> stmt);
+        void resolve(std::shared_ptr<Expr> expr);
         void visitBlockStmt(std::shared_ptr<Block> stmt)override;
         void visitVarStmt(std::shared_ptr<Var> stmt) override;
         std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;
