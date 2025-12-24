@@ -244,7 +244,12 @@ void Interpreter::visitWhileStmt(std::shared_ptr<While> stmt){
 }
 std::any Interpreter::visitAssignExpr(std::shared_ptr<Assign> expr){
     std::any value = evaluate(expr->value);
-    environment->assign(expr->name,value);
+    int distance =locals.at(expr);
+    if(distance!=NULL){
+        environment->assignAt(distance,expr->name,value);
+    }else{
+        globals->assign(expr->name,value);
+    }
     return value;
 }
 std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
@@ -268,9 +273,9 @@ std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
 std::any Interpreter::lookUpVariable(Token name, std::shared_ptr<Expr> expr){
     int distance=locals[expr];
     if(distance!=NULL){
-        return environment.getAt(distance,name.getLexeme());
+        return environment->getAt(distance,name.getLexeme());
     }else{
-        return globals.get(name);
+        return globals->get(name);
     }
 }
 bool Interpreter::isTruthy(const std::any& obj){

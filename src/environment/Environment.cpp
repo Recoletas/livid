@@ -5,7 +5,18 @@ void Environment::define(const std::string& name,const std::any& value){
     values[name]=value;
 }
 std::any Environment::getAt(int distance,std::string name){
-    return ancestor(distance).value.get(name);
+    auto env=ancestor(distance);
+    return env->values.at(name);
+}
+void Environment::assignAt(int distance, Token name, std::any value) {
+    ancestor(distance)->values[name.getLexeme()]= value;
+}
+std::shared_ptr<Environment> Environment::ancestor(int distance){
+    std::shared_ptr<Environment> environment=shared_from_this();
+    for(int i=0;i<distance;i++){
+        environment=environment->enclosing;
+    }
+    return environment;
 }
 std::any Environment::get(const Token& name){
     const std::string& key =name.getLexeme();
