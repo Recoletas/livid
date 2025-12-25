@@ -69,6 +69,7 @@ std::shared_ptr<Expr> Parser::expression(){
 }
 std::shared_ptr<Stmt> Parser::declaration(){
     try{
+        if(match(TokenType::CLASS)) return classDeclaration();
         if(match(TokenType::FUN)) return function("function");
         if(match(TokenType::VAR)) return varDeclaration();
 
@@ -77,6 +78,17 @@ std::shared_ptr<Stmt> Parser::declaration(){
         synchronize();
         return nullptr;
     }
+}
+std::shared_ptr<Stmt> Parser::classDeclaration(){
+    Token name=consume(TokenType::IDENTIFIER,"Expect class name.");
+    consume(TokenType::LEFT_BRACE,"Expect '{' before class body.");
+    std::vector<std::shared_ptr<Function>> methods;
+    while(!check(TokenType::RIGHT_BRACE)&&!isAtEnd()){
+        methods.push_back(function("method"));
+    }
+    consume(TokenType::RIGHT_BRACE,"Expect '}' after class body.");
+
+    return std::make_shared<Class>(name,methods);
 }
 std::shared_ptr<Stmt> Parser::statement(){
     if(match(TokenType::FOR)) return forStatement();

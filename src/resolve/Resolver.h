@@ -30,6 +30,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         void resolve(std::shared_ptr<Stmt> stmt);
         void resolve(std::shared_ptr<Expr> expr);
         void visitBlockStmt(std::shared_ptr<Block> stmt)override;
+        void visitClassStmt(std::shared_ptr<Class> stmt)override;
         void visitVarStmt(std::shared_ptr<Var> stmt) override;
         std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;
         std::any visitAssignExpr(std::shared_ptr<Assign> expr)override;

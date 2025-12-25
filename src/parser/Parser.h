@@ -53,6 +53,7 @@ class Parser{
         std::shared_ptr<Expr> finishCall(std::shared_ptr<Expr> callee);
         std::shared_ptr<Expr> primary();
         std::shared_ptr<Stmt> declaration();
+        std::shared_ptr<Stmt> classDeclaration();
         std::shared_ptr<Stmt> varDeclaration();
         std::shared_ptr<Stmt> whileStatement();
         std::shared_ptr<Expr> assignment();

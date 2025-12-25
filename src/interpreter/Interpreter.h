@@ -28,6 +28,7 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
         std::any visitVariableExpr(std::shared_ptr<Variable> expr)override;
         std::any visitAssignExpr(std::shared_ptr<Assign> expr)override;
         void visitBlockStmt(std::shared_ptr<Block>)override;
+        void visitClassStmt(std::shared_ptr<Class> stmt)override;
         void executeBlock(std::vector<std::shared_ptr<Stmt>> statements,std::shared_ptr<Environment> environment);
         void resolve(std::shared_ptr<Expr> expr,int depth);
     private:

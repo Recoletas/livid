@@ -7,6 +7,7 @@
 #include "core/Token.h"
 
 class Block;
+class Class;
 class Expression;
 class Function;
 class If;
@@ -21,6 +22,7 @@ public:
     virtual ~StmtVisitor() = default;
 
     virtual void visitBlockStmt(std::shared_ptr<Block> stmt) = 0;
+    virtual void visitClassStmt(std::shared_ptr<Class> stmt) = 0;
     virtual void visitExpressionStmt(std::shared_ptr<Expression> stmt) = 0;
     virtual void visitFunctionStmt(std::shared_ptr<Function> stmt) = 0;
     virtual void visitIfStmt(std::shared_ptr<If> stmt) = 0;
@@ -47,6 +49,21 @@ public:
 
     void accept(StmtVisitor& visitor) override {
         return visitor.visitBlockStmt(shared_from_this());
+    }
+};
+
+class Class : public Stmt,
+                                 public std::enable_shared_from_this<Class> {
+public:
+    Class(Token name, std::vector<std::shared_ptr<Function>> methods)
+        : name(name), methods(methods) {}
+
+    // 字段
+    Token name;
+    std::vector<std::shared_ptr<Function>> methods;
+
+    void accept(StmtVisitor& visitor) override {
+        return visitor.visitClassStmt(shared_from_this());
     }
 };
 

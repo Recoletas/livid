@@ -4,6 +4,7 @@
 #include "fun/Return.h"
 #include "core/RuntimeError.h"
 #include "core/livid.h"
+#include "class/LividClass.h"
 #include <any>
 #include <stdexcept>
 #include <iostream>
@@ -269,6 +270,11 @@ std::any Interpreter::visitUnaryExpr(std::shared_ptr<Unary> expr){
 std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
     return lookUpVariable(expr->name, expr);
     
+}
+void Interpreter::visitClassStmt(std::shared_ptr<Class> stmt){
+    environment->define(stmt->name.getLexeme(),nullptr);
+    LividClass kalss(stmt->name.getLexeme());
+    environment->assign(stmt->name,klass);
 }
 std::any Interpreter::lookUpVariable(Token name, std::shared_ptr<Expr> expr){
     int distance=locals[expr];

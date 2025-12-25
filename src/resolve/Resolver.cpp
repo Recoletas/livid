@@ -7,6 +7,10 @@ void Resolver::visitBlockStmt(std::shared_ptr<Block> stmt){
     resolve(stmt->statements);
     endScope();
 }
+void Resolver::visitClassStmt(std::shared_ptr<Class> stmt){
+    declare(stmt->name);
+    define(stmt->name);
+}
 void Resolver::visitVarStmt(std::shared_ptr<Var> stmt) {
     declare(stmt->name);
     if(stmt->initializer!=nullptr){

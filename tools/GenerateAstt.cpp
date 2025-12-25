@@ -131,6 +131,8 @@ int main(int argc,char* argv[]){
     std::vector<AstType> stmtTypes={
         {"Stmt","Block",{{"std::vector<std::shared_ptr<Stmt>>","statements"}}},
 
+        {"Stmt","Class",{{"Token","name"},{"std::vector<std::shared_ptr<Function>>","methods"}}},
+
         {"Stmt","Expression",{{"std::shared_ptr<Expr>","expression"}}},
 
         {"Stmt","Function",{{"Token","name"},{"std::vector<Token>","params"},{"std::vector<std::shared_ptr<Stmt>>","body"}}},
