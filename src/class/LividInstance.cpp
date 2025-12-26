@@ -7,3 +7,6 @@ std::any LividInstance::get(Token name){
     }
     throw RuntimeError(name,"Undefined property '"+name.getLexeme()+"'.");
 }
+void LividInstance::set(Token name,std::any value){
+    fields[name.getLexeme()]=value;
+}

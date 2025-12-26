@@ -5,12 +5,13 @@
 #include <string>
 #include "fun/Callable.h"
 
-class LividClass:public Callable{
+class LividClass:public Callable,
+                 public std::enable_shared_from_this<LividClass>{
     public:
         std::string name;
         LividClass(std::string name):name(name){};
         std::string toString()override;
-        std::any call(Interpreter interpreter,std::vector<std::any> arguments);
+        std::any call(Interpreter &interpreter,std::vector<std::any> arguments);
         int arity()override=0;
 
 };

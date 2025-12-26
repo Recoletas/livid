@@ -6,6 +6,8 @@
 #include "core/livid.h"
 #include "class/LividClass.h"
 #include "class/LividInstance.h"
+#include "ast/Expr.h"
+#include "ast/Stmt.h"
 #include <any>
 #include <stdexcept>
 #include <iostream>
@@ -76,6 +78,16 @@ std::any Interpreter::visitLogicalExpr(std::shared_ptr<Logical> expr){
     }
 
     return evaluate(expr->right);
+}
+std::any Interpreter::visitSetExpr(std::shared_ptr<Set> expr){
+    std::any object=evaluate(expr->object);
+    if(object.type()!=typeid(std::shared_ptr<LividInstance>)){
+        throw RuntimeError(expr->name,"Only instances have fields.");
+    }
+    auto instance=std::any_cast<std::shared_ptr<LividInstance>>(object);
+    std::any value=evaluate(expr->value);
+    instance->set(expr->name,value);
+    return value;
 }
 std::any Interpreter::visitGroupingExpr(std::shared_ptr<Grouping> expr){
     return evaluate(expr->expression);
@@ -255,7 +267,7 @@ void Interpreter::visitWhileStmt(std::shared_ptr<While> stmt){
 std::any Interpreter::visitAssignExpr(std::shared_ptr<Assign> expr){
     std::any value = evaluate(expr->value);
     int distance =locals.at(expr);
-    if(distance!=NULL){
+    if(distance>=0){
         environment->assignAt(distance,expr->name,value);
     }else{
         globals->assign(expr->name,value);
@@ -281,8 +293,8 @@ std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
     
 }
 void Interpreter::visitClassStmt(std::shared_ptr<Class> stmt){
-    environment->define(stmt->name.getLexeme(),nullptr);
-    LividClass kalss(stmt->name.getLexeme());
+    environment->define(stmt->name.getLexeme(),std::any{});
+    auto klass=std::make_shared<LividClass>(stmt->name.getLexeme());
     environment->assign(stmt->name,klass);
 }
 std::any Interpreter::lookUpVariable(Token name, std::shared_ptr<Expr> expr){

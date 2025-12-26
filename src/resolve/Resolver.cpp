@@ -140,6 +140,11 @@ std::any Resolver::visitLogicalExpr(std::shared_ptr<Logical> expr){
     resolve(expr->right);
     return std::any{};
 }
+std::any Resolver::visitSetExpr(std::shared_ptr<Set> expr){
+    resolve(expr->value);
+    resolve(expr->object);
+    return std::any{};
+}
 std::any Resolver::visitUnaryExpr(std::shared_ptr<Unary> expr){
     resolve(expr->right);
     return std::any{};

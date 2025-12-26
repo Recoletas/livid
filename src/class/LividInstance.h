@@ -6,11 +6,12 @@
 
 class LividInstance{
     public:
-        LividInstance(LividClass klass):klass(klass){};
-        std::any get(Token name);
-        std::string toString()override;
+        LividInstance(std::shared_ptr<LividClass> klass):klass(klass){};
+        std::any get(const Token& name);
+        void set(const Token& name,std::any value);
+        std::string toString();
     private:
-        LividClass klass;
+        std::shared_ptr<LividClass> klass;
         std::unordered_map<std::string,std::any> fields;
 
 };

@@ -234,10 +234,13 @@ std::shared_ptr<Expr> Parser::assignment(){
 
         //指针向下转型
         std::shared_ptr<Variable> Variable_expr =std::dynamic_pointer_cast<Variable>(expr);
+        std::shared_ptr<Get> get=std::dynamic_pointer_cast<Get>(expr);
 
         if(Variable_expr!= nullptr){
             Token name =Variable_expr->name;
             return std::make_shared<Assign>(name,value);
+        }else if(get!=nullptr){
+            return std::make_shared<Set>(get->object,get->name,value);
         }
 
         error(equals,"Invalid assignment target.");
