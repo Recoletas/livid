@@ -9,6 +9,7 @@
 class Assign;
 class Binary;
 class Call;
+class Get;
 class Grouping;
 class Literal;
 class Logical;
@@ -23,6 +24,7 @@ public:
     virtual std::any visitAssignExpr(std::shared_ptr<Assign> expr) = 0;
     virtual std::any visitBinaryExpr(std::shared_ptr<Binary> expr) = 0;
     virtual std::any visitCallExpr(std::shared_ptr<Call> expr) = 0;
+    virtual std::any visitGetExpr(std::shared_ptr<Get> expr) = 0;
     virtual std::any visitGroupingExpr(std::shared_ptr<Grouping> expr) = 0;
     virtual std::any visitLiteralExpr(std::shared_ptr<Literal> expr) = 0;
     virtual std::any visitLogicalExpr(std::shared_ptr<Logical> expr) = 0;
@@ -80,6 +82,21 @@ public:
 
     std::any accept(ExprVisitor& visitor) override {
         return visitor.visitCallExpr(shared_from_this());
+    }
+};
+
+class Get : public Expr,
+                                 public std::enable_shared_from_this<Get> {
+public:
+    Get(std::shared_ptr<Expr> object, Token name)
+        : object(object), name(name) {}
+
+    // 字段
+    std::shared_ptr<Expr> object;
+    Token name;
+
+    std::any accept(ExprVisitor& visitor) override {
+        return visitor.visitGetExpr(shared_from_this());
     }
 };
 

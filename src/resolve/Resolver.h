@@ -25,7 +25,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         void resolveLocal(std::shared_ptr<Expr> expr,Token name);
         void resolveFunction(std::shared_ptr<Function>  function,FunctionType type);
     public:
-        Resolver(Interpreter interpreter){this->interpreter=interpreter;}
+        Resolver(Interpreter &interpreter){this->interpreter=interpreter;}
         void resolve(std::vector<std::shared_ptr<Stmt>> statements);
         void resolve(std::shared_ptr<Stmt> stmt);
         void resolve(std::shared_ptr<Expr> expr);
@@ -46,6 +46,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
         std::any visitLogicalExpr(std::shared_ptr<Logical> expr)override;
         std::any visitUnaryExpr(std::shared_ptr<Unary> expr)override;
+        std::any visitGetExpr(std::shared_ptr<Get> expr) override;
 };
 
 #endif

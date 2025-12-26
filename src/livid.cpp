@@ -53,7 +53,7 @@ void Livid::run(const std::string &source){
     std::vector<Token> tokens=scanner.scanTokens();
     Parser parser(tokens);
     std::vector<std::shared_ptr<Stmt>> statements=parser.parse();
-
+    
     Resolver resolver(interpreter);
     resolver.resolve(statements);
     if(hadError) return;

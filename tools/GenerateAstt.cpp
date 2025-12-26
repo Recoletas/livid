@@ -121,6 +121,7 @@ int main(int argc,char* argv[]){
         {"Expr","Assign",{{"Token","name"},{"std::shared_ptr<Expr>","value"}}},
         {"Expr","Binary",{{"std::shared_ptr<Expr>","left"},{"Token","op"},{"std::shared_ptr<Expr>","right"}}},
         {"Expr","Call",{{"std::shared_ptr<Expr>","callee"},{"Token","paren"},{"std::vector<std::shared_ptr<Expr>>","arguments"}}},
+        {"Expr","Get",{{"std::shared_ptr<Expr>","object"},{"Token","name"}}},
         {"Expr","Grouping",{{"std::shared_ptr<Expr>","expression"}}},
         {"Expr","Literal",{{"std::any","value"}}},
         {"Expr","Logical",{{"std::shared_ptr<Expr>","left"},{"Token","op"},{"std::shared_ptr<Expr>","right"}}},

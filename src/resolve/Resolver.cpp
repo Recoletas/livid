@@ -124,6 +124,10 @@ std::any Resolver::visitCallExpr(std::shared_ptr<Call> expr){
     }
     return std::any{};
 }
+std::any Resolver::visitGetExpr(std::shared_ptr<Get> expr){
+    resolve(expr->object);
+    return std::any{};
+}
 std::any Resolver::visitGroupingExpr(std::shared_ptr<Grouping> expr){
     resolve(expr->expression);
     return std::any{};

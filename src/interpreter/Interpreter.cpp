@@ -5,6 +5,7 @@
 #include "core/RuntimeError.h"
 #include "core/livid.h"
 #include "class/LividClass.h"
+#include "class/LividInstance.h"
 #include <any>
 #include <stdexcept>
 #include <iostream>
@@ -154,6 +155,14 @@ std::any Interpreter::visitCallExpr(std::shared_ptr<Call> expr){
         " arguments but got "+std::to_string(arguments.size())+".");
     }
     return function->call(*this,arguments);
+}
+std::any Interpreter::visitGetExpr(std::shared_ptr<Get> expr){
+    std::any object=evaluate(expr->object);
+    if(object.type()==typeid(std::shared_ptr<LividInstance>)){
+        auto instance =std::any_cast<std::shared_ptr<LividInstance>>(object);
+        return instance->get(expr->name);
+    }
+    throw RuntimeError(expr->name,"Only instances have properties.");
 }
 void Interpreter::checkNumberOperands(Token op,std::any left,std::any right){
     if(left.type()==typeid(double)&&right.type()==typeid(double)) return ;
