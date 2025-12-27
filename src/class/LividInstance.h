@@ -10,8 +10,8 @@ class LividInstance{
         std::any get(const Token& name);
         void set(const Token& name,std::any value);
         std::string toString();
-    private:
         std::shared_ptr<LividClass> klass;
+    private:
         std::unordered_map<std::string,std::any> fields;
 
 };

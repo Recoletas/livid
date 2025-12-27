@@ -6,3 +6,9 @@ std::any LividClass::call(Interpreter& interpreter,std::vector<std::any> argumen
     auto instance=std::make_shared<LividInstance>(shared_from_this());
     return instance;
 }
+std::shared_ptr<LividFunction> LividClass::findMethod(std::string name){
+    if(methods.count(name)){
+        return methods.at(name);
+    }
+    return nullptr;
+}

@@ -1,12 +1,16 @@
 #include "class/LividInstance.h"
 #include "core/RuntimeError.h"
 
-std::any LividInstance::get(Token name){
+std::any LividInstance::get(const Token& name){
     if(fields.count(name.getLexeme())){
         return fields.at(name.getLexeme());
     }
+    std::shared_ptr<LividFunction> method =klass->findMethod(name.getLexeme());
+    if(method!=nullptr) return method;
     throw RuntimeError(name,"Undefined property '"+name.getLexeme()+"'.");
 }
-void LividInstance::set(Token name,std::any value){
+
+
+void LividInstance::set(const Token& name,std::any value){
     fields[name.getLexeme()]=value;
 }

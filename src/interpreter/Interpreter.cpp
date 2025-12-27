@@ -294,7 +294,14 @@ std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
 }
 void Interpreter::visitClassStmt(std::shared_ptr<Class> stmt){
     environment->define(stmt->name.getLexeme(),std::any{});
-    auto klass=std::make_shared<LividClass>(stmt->name.getLexeme());
+    
+    std::unordered_map<std::string,LividFunction> methods;
+    for(std::shared_ptr<Function> method:stmt->methods){
+        LividFunction function(method,environment);
+        methods[method->name.getLexeme()]=function;
+    }
+
+    auto klass=std::make_shared<LividClass>(stmt->name.getLexeme(),methods);
     environment->assign(stmt->name,klass);
 }
 std::any Interpreter::lookUpVariable(Token name, std::shared_ptr<Expr> expr){

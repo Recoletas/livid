@@ -1,8 +1,7 @@
 #ifndef INTERPRETER_H 
 #define INTERPRETER_H
 
-#include "ast/Expr.h"
-#include "ast/Stmt.h"
+
 #include <any>
 #include <stdexcept>
 #include <string>

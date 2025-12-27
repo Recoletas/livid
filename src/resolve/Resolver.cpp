@@ -9,7 +9,11 @@ void Resolver::visitBlockStmt(std::shared_ptr<Block> stmt){
 }
 void Resolver::visitClassStmt(std::shared_ptr<Class> stmt){
     declare(stmt->name);
-    define(stmt->name);
+    define(stmt->name); 
+    for(std::shared_ptr<Function> method :stmt->methods){
+        FunctionType declaration=FunctionType::METHOD;
+        resolveFunction(method,declaration);
+    }
 }
 void Resolver::visitVarStmt(std::shared_ptr<Var> stmt) {
     declare(stmt->name);
