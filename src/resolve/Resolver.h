@@ -12,6 +12,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         enum class FunctionType{
             NONE,
             FUNCTION,
+            INITIALIZER,
             METHOD
         };
         enum class ClassType{

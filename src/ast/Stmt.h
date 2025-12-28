@@ -15,6 +15,7 @@ class Print;
 class Return;
 class Var;
 class While;
+class Expr;
 
 // Visitor 
 class StmtVisitor {

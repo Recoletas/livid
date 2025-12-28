@@ -3,8 +3,14 @@
 
 #include <vector>
 #include <string>
+#include <memory>
+#include <unordered_map>
 #include "fun/Callable.h"
-#include "fun/LividFunction.h"
+
+class LividInstance; 
+class LividFunction; 
+class Interpreter;
+
 
 class LividClass:public Callable,
                  public std::enable_shared_from_this<LividClass>{

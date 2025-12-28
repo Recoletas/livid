@@ -1,18 +1,23 @@
 #include "interpreter/Interpreter.h"
+
+#include "ast/Expr.h"
+#include "ast/Stmt.h"
+
+#include "class/LividClass.h"
+#include "class/LividInstance.h"
 #include "fun/Callable.h"
 #include "fun/LividFunction.h"
 #include "fun/Return.h"
+
 #include "core/RuntimeError.h"
 #include "core/livid.h"
-#include "class/LividClass.h"
-#include "class/LividInstance.h"
-#include "ast/Expr.h"
-#include "ast/Stmt.h"
+#include "environment/Environment.h"
+
+
 #include <any>
 #include <stdexcept>
 #include <iostream>
 #include <sstream>
-
 #include <chrono>
 
 class ClockNative : public Callable {
@@ -232,7 +237,7 @@ void Interpreter::visitExpressionStmt(std::shared_ptr<Expression> stmt){
     evaluate(stmt->expression);
 }
 void Interpreter::visitFunctionStmt(std::shared_ptr<Function> stmt){
-    auto lividFunc = std::make_shared<LividFunction>(stmt, environment);
+    auto lividFunc = std::make_shared<LividFunction>(stmt, environment,false);
     std::shared_ptr<Callable> function = std::static_pointer_cast<Callable>(lividFunc);
     environment->define(stmt->name.getLexeme(),function);
 }
@@ -298,9 +303,9 @@ std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
 void Interpreter::visitClassStmt(std::shared_ptr<Class> stmt){
     environment->define(stmt->name.getLexeme(),std::any{});
     
-    std::unordered_map<std::string,LividFunction> methods;
+    std::unordered_map<std::string,std::shared_ptr<LividFunction>> methods;
     for(std::shared_ptr<Function> method:stmt->methods){
-        LividFunction function(method,environment);
+        auto function = std::make_shared<LividFunction>(method, environment,method->name.getLexeme()=="init");
         methods[method->name.getLexeme()]=function;
     }
 

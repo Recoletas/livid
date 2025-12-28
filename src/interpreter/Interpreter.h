@@ -3,9 +3,17 @@
 
 
 #include <any>
-#include <stdexcept>
-#include <string>
-#include "environment/Environment.h"
+#include <vector>
+#include <memory>
+#include <map>
+
+#include "ast/Expr.h"
+#include "ast/Stmt.h"
+
+class Environment;
+class RuntimeError;
+
+
 
 class Interpreter:public ExprVisitor,public StmtVisitor{
     public:

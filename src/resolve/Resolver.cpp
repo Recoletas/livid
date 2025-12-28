@@ -16,6 +16,9 @@ void Resolver::visitClassStmt(std::shared_ptr<Class> stmt){
     (*scopes.back())["this"]=true; 
     for(std::shared_ptr<Function> method :stmt->methods){
         FunctionType declaration=FunctionType::METHOD;
+        if(method->name.getLexeme()=="init"){
+            declaration=FunctionType::INITIALIZER;
+        }
         resolveFunction(method,declaration);
     }
     endScope();
@@ -115,6 +118,9 @@ void Resolver::visitReturnStmt(std::shared_ptr<Return> stmt){
         Livid::error(stmt->keyword,"Can't return from top-level code.");
     }
     if(stmt->value!=nullptr){
+        if(currentFunction==FunctionType::INITIALIZER){
+            Livid::error(stmt->keyword,"Can't return a value from an initializer.");
+        }
         resolve(stmt->value);
     }
 }
