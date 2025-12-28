@@ -351,6 +351,8 @@ std::shared_ptr<Expr> Parser::primary(){
         return std::make_shared<Literal>(previous().getLiteral());
     }
 
+    if(match(TokenType::THIS)) return std::make_shared<This>(previous());
+
     if (match(TokenType::IDENTIFIER)) {
       return std::make_shared<Variable> (previous());
     }

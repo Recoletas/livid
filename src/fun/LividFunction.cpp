@@ -22,3 +22,8 @@ int LividFunction::arity(){
 std::string LividFunction::toString(){
     return "<fn "+declaration->name.getLexeme()+">";
 }
+std::shared_ptr<LividFunction> LividFunction::bind(std::shared_ptr<LividInstance> instance){
+    auto environment =std::make_shared<Environment>(closure);
+    environment->define("this",instance);
+    return std::make_shared<LividFunction>(declaration,environment);
+}

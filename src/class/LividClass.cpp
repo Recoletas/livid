@@ -4,6 +4,10 @@
 
 std::any LividClass::call(Interpreter& interpreter,std::vector<std::any> arguments){
     auto instance=std::make_shared<LividInstance>(shared_from_this());
+    std::shared_ptr<LividFunction> initializer=findMethod("init");
+    if(initializer !=nullptr){
+        initializer->bind(instance)->call(interpreter,arguments);
+    }
     return instance;
 }
 std::shared_ptr<LividFunction> LividClass::findMethod(std::string name){
@@ -11,4 +15,9 @@ std::shared_ptr<LividFunction> LividClass::findMethod(std::string name){
         return methods.at(name);
     }
     return nullptr;
+}
+int LividClass::arity(){
+    std::shared_ptr<LividFunction> initializer=findMethod("init");
+    if(initializer!=nullptr) return 0;
+    return initializer->arity();
 }

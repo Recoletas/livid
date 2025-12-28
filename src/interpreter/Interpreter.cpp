@@ -89,6 +89,9 @@ std::any Interpreter::visitSetExpr(std::shared_ptr<Set> expr){
     instance->set(expr->name,value);
     return value;
 }
+std::any Interpreter::visitThisExpr(std::shared_ptr<This> expr){
+    return lookUpVariable(expr->keyword,expr);
+}
 std::any Interpreter::visitGroupingExpr(std::shared_ptr<Grouping> expr){
     return evaluate(expr->expression);
 }

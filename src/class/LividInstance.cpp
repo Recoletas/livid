@@ -6,7 +6,7 @@ std::any LividInstance::get(const Token& name){
         return fields.at(name.getLexeme());
     }
     std::shared_ptr<LividFunction> method =klass->findMethod(name.getLexeme());
-    if(method!=nullptr) return method;
+    if(method!=nullptr) return method->bind(this);
     throw RuntimeError(name,"Undefined property '"+name.getLexeme()+"'.");
 }
 

@@ -8,12 +8,18 @@ void Resolver::visitBlockStmt(std::shared_ptr<Block> stmt){
     endScope();
 }
 void Resolver::visitClassStmt(std::shared_ptr<Class> stmt){
+    ClassType enclosingClass=currentClass;
+    currentClass=ClassType::CLASS;
     declare(stmt->name);
-    define(stmt->name); 
+    define(stmt->name);
+    beginScope();
+    (*scopes.back())["this"]=true; 
     for(std::shared_ptr<Function> method :stmt->methods){
         FunctionType declaration=FunctionType::METHOD;
         resolveFunction(method,declaration);
     }
+    endScope();
+    currentClass=enclosingClass;
 }
 void Resolver::visitVarStmt(std::shared_ptr<Var> stmt) {
     declare(stmt->name);
@@ -147,6 +153,14 @@ std::any Resolver::visitLogicalExpr(std::shared_ptr<Logical> expr){
 std::any Resolver::visitSetExpr(std::shared_ptr<Set> expr){
     resolve(expr->value);
     resolve(expr->object);
+    return std::any{};
+}
+std::any Resolver::visitThisExpr(std::shared_ptr<This> expr){
+    if(currentClass==ClassType::NONE){
+        Livid::error(expr->keyword,"Can't use 'this' outside of a class.");
+        return std::any{};
+    }
+    resolveLocal(expr,expr->keyword);
     return std::any{};
 }
 std::any Resolver::visitUnaryExpr(std::shared_ptr<Unary> expr){

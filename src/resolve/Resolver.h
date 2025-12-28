@@ -14,6 +14,11 @@ class Resolver :public ExprVisitor,public StmtVisitor{
             FUNCTION,
             METHOD
         };
+        enum class ClassType{
+            NONE,
+            CLASS
+        };
+        ClassType currentClass =ClassType::NONE;
         FunctionType currentFunction =FunctionType::NONE;
         Interpreter interpreter;
         std::vector<std::shared_ptr<std::unordered_map<std::string, bool>>> scopes;
@@ -46,6 +51,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
         std::any visitLogicalExpr(std::shared_ptr<Logical> expr)override;
         std::any visitSetExpr(std::shared_ptr<Set> expr)override;
+        std::any visitThisExpr(std::shared_ptr<This> expr)override;
         std::any visitUnaryExpr(std::shared_ptr<Unary> expr)override;
         std::any visitGetExpr(std::shared_ptr<Get> expr) override;
 };

@@ -14,7 +14,7 @@ class LividClass:public Callable,
         LividClass(std::string name,std::unordered_map<std::string,std::shared_ptr<LividFunction>> methods):name(name),methods(methods){};
         std::string toString()override;
         std::any call(Interpreter &interpreter,std::vector<std::any> arguments);
-        int arity()override=0;
+        int arity()override;
         std::shared_ptr<LividFunction> findMethod(std::string name);
     private:
         std::unordered_map<std::string,std::shared_ptr<LividFunction>>methods;
