@@ -12,6 +12,22 @@ void Resolver::visitClassStmt(std::shared_ptr<Class> stmt){
     currentClass=ClassType::CLASS;
     declare(stmt->name);
     define(stmt->name);
+
+    if(stmt->superclass != nullptr &&
+        stmt->name.getLexeme()==(stmt->superclass->name.getLexeme())) {
+      Livid::error(stmt->superclass->name,
+          "A class can't inherit from itself.");
+    }
+
+    if(stmt->superclass!=nullptr){
+        currentClass=ClassType::SUBCLASS;
+        resolve(stmt->superclass);
+    }
+    if(stmt->superclass!=nullptr){
+        beginScope();
+        (*scopes.back())["super"]=true;
+    }
+
     beginScope();
     (*scopes.back())["this"]=true; 
     for(std::shared_ptr<Function> method :stmt->methods){
@@ -22,6 +38,7 @@ void Resolver::visitClassStmt(std::shared_ptr<Class> stmt){
         resolveFunction(method,declaration);
     }
     endScope();
+    if (stmt->superclass != nullptr) endScope(); 
     currentClass=enclosingClass;
 }
 void Resolver::visitVarStmt(std::shared_ptr<Var> stmt) {
@@ -159,6 +176,15 @@ std::any Resolver::visitLogicalExpr(std::shared_ptr<Logical> expr){
 std::any Resolver::visitSetExpr(std::shared_ptr<Set> expr){
     resolve(expr->value);
     resolve(expr->object);
+    return std::any{};
+}
+std::any Resolver::visitSuperExpr(std::shared_ptr<Super> expr){
+    if(currentClass==ClassType::NONE){
+        Livid::error(expr->keyword,"Can't use 'super' outsider of a class.");
+    }else if(currentClass!=ClassType::SUBCLASS){
+        Livid::error(expr->keyword,"Can't use 'super' in a class with no superclass.");
+    }
+    resolveLocal(expr,expr->keyword);
     return std::any{};
 }
 std::any Resolver::visitThisExpr(std::shared_ptr<This> expr){

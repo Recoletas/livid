@@ -20,6 +20,7 @@ class Environment:public std::enable_shared_from_this<Environment> {
         void assignAt(int distance, Token name, std::any value);
         std::any get(const Token& name);
         void assign(const Token& name,const std::any& value);
+        std::shared_ptr<Environment> getEnclosing();
         
     private:
         std::unordered_map<std::string,std::any> values;

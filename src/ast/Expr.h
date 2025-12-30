@@ -14,6 +14,7 @@ class Grouping;
 class Literal;
 class Logical;
 class Set;
+class Super;
 class This;
 class Unary;
 class Variable;
@@ -31,6 +32,7 @@ public:
     virtual std::any visitLiteralExpr(std::shared_ptr<Literal> expr) = 0;
     virtual std::any visitLogicalExpr(std::shared_ptr<Logical> expr) = 0;
     virtual std::any visitSetExpr(std::shared_ptr<Set> expr) = 0;
+    virtual std::any visitSuperExpr(std::shared_ptr<Super> expr) = 0;
     virtual std::any visitThisExpr(std::shared_ptr<This> expr) = 0;
     virtual std::any visitUnaryExpr(std::shared_ptr<Unary> expr) = 0;
     virtual std::any visitVariableExpr(std::shared_ptr<Variable> expr) = 0;
@@ -161,6 +163,21 @@ public:
 
     std::any accept(ExprVisitor& visitor) override {
         return visitor.visitSetExpr(shared_from_this());
+    }
+};
+
+class Super : public Expr,
+                                 public std::enable_shared_from_this<Super> {
+public:
+    Super(Token keyword, Token method)
+        : keyword(keyword), method(method) {}
+
+    // 字段
+    Token keyword;
+    Token method;
+
+    std::any accept(ExprVisitor& visitor) override {
+        return visitor.visitSuperExpr(shared_from_this());
     }
 };
 

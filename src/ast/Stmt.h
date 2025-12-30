@@ -15,7 +15,6 @@ class Print;
 class Return;
 class Var;
 class While;
-class Expr;
 
 // Visitor 
 class StmtVisitor {
@@ -56,11 +55,12 @@ public:
 class Class : public Stmt,
                                  public std::enable_shared_from_this<Class> {
 public:
-    Class(Token name, std::vector<std::shared_ptr<Function>> methods)
-        : name(name), methods(methods) {}
+    Class(Token name, std::shared_ptr<Variable> superclass, std::vector<std::shared_ptr<Function>> methods)
+        : name(name), superclass(superclass), methods(methods) {}
 
     // 字段
     Token name;
+    std::shared_ptr<Variable> superclass;
     std::vector<std::shared_ptr<Function>> methods;
 
     void accept(StmtVisitor& visitor) override {

@@ -94,6 +94,16 @@ std::any Interpreter::visitSetExpr(std::shared_ptr<Set> expr){
     instance->set(expr->name,value);
     return value;
 }
+std::any Interpreter::visitSuperExpr(std::shared_ptr<Super> expr){
+    int distance =locals.at(expr);
+    std::shared_ptr<LividClass> superclass=std::any_cast<std::shared_ptr<LividClass>>(environment->getAt(distance,"super"));
+    std::shared_ptr<LividInstance> object=std::any_cast<std::shared_ptr<LividInstance>>(environment->getAt(distance-1,"this"));
+    std::shared_ptr<LividFunction> method=superclass->findMethod(expr->method.getLexeme());
+    if(method==nullptr){
+        throw RuntimeError(expr->method,"Undefined property '"+expr->method.getLexeme()+"'.");
+    }
+    return method->bind(object);
+}
 std::any Interpreter::visitThisExpr(std::shared_ptr<This> expr){
     return lookUpVariable(expr->keyword,expr);
 }
@@ -301,15 +311,32 @@ std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
     
 }
 void Interpreter::visitClassStmt(std::shared_ptr<Class> stmt){
+    std::shared_ptr<LividClass> superclassPtr=nullptr;
+    std::any superclass=std::any{};
+    if(stmt->superclass!=nullptr){
+        superclass=evaluate(stmt->superclass);
+        if(superclass.type()!=typeid(std::shared_ptr<LividClass>)){
+            throw RuntimeError(stmt->superclass->name,"Superclass must be a class.");
+        }
+        superclassPtr=std::any_cast<std::shared_ptr<LividClass>>(superclass);
+    }
     environment->define(stmt->name.getLexeme(),std::any{});
     
+    if(stmt->superclass!=nullptr){
+        environment=std::make_shared<Environment>(environment);
+        environment->define("super",superclassPtr);
+    }
     std::unordered_map<std::string,std::shared_ptr<LividFunction>> methods;
     for(std::shared_ptr<Function> method:stmt->methods){
         auto function = std::make_shared<LividFunction>(method, environment,method->name.getLexeme()=="init");
         methods[method->name.getLexeme()]=function;
     }
 
-    auto klass=std::make_shared<LividClass>(stmt->name.getLexeme(),methods);
+
+    auto klass=std::make_shared<LividClass>(stmt->name.getLexeme(),superclassPtr,methods);
+    if(stmt->superclass!=nullptr){
+        environment=environment->getEnclosing();
+    }
     environment->assign(stmt->name,klass);
 }
 std::any Interpreter::lookUpVariable(Token name, std::shared_ptr<Expr> expr){

@@ -40,3 +40,6 @@ void Environment::assign(const Token& name,const std::any& value){
     }
     throw RuntimeError(name,"Undefined variable assign '"+name.getLexeme()+"'.");
 }
+std::shared_ptr<Environment> Environment::getEnclosing() {
+    return enclosing;
+}

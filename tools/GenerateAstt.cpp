@@ -126,6 +126,7 @@ int main(int argc,char* argv[]){
         {"Expr","Literal",{{"std::any","value"}}},
         {"Expr","Logical",{{"std::shared_ptr<Expr>","left"},{"Token","op"},{"std::shared_ptr<Expr>","right"}}},
         {"Expr","Set",{{"std::shared_ptr<Expr>","object"},{"Token","name"},{"std::shared_ptr<Expr>","value"}}},
+        {"Expr","Super",{{"Token","keyword"},{"Token","method"}}},
         {"Expr","This",{{"Token","keyword"}}},
         {"Expr","Unary",{{"Token","op"},{"std::shared_ptr<Expr>","right"}}},
         {"Expr","Variable",{{"Token","name"}}}
@@ -134,7 +135,7 @@ int main(int argc,char* argv[]){
     std::vector<AstType> stmtTypes={
         {"Stmt","Block",{{"std::vector<std::shared_ptr<Stmt>>","statements"}}},
 
-        {"Stmt","Class",{{"Token","name"},{"std::vector<std::shared_ptr<Function>>","methods"}}},
+        {"Stmt","Class",{{"Token","name"},{"std::shared_ptr<Variable>","superclass"},{"std::vector<std::shared_ptr<Function>>","methods"}}},
 
         {"Stmt","Expression",{{"std::shared_ptr<Expr>","expression"}}},
 

@@ -15,6 +15,9 @@ std::shared_ptr<LividFunction> LividClass::findMethod(std::string name){
     if(methods.count(name)){
         return methods.at(name);
     }
+    if(superclass!=nullptr){
+        return superclass->findMethod(name);
+    }
     return nullptr;
 }
 int LividClass::arity(){

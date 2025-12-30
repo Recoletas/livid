@@ -17,7 +17,8 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         };
         enum class ClassType{
             NONE,
-            CLASS
+            CLASS,
+            SUBCLASS
         };
         ClassType currentClass =ClassType::NONE;
         FunctionType currentFunction =FunctionType::NONE;
@@ -52,6 +53,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
         std::any visitLogicalExpr(std::shared_ptr<Logical> expr)override;
         std::any visitSetExpr(std::shared_ptr<Set> expr)override;
+        std::any visitSuperExpr(std::shared_ptr<Super> expr)override;
         std::any visitThisExpr(std::shared_ptr<This> expr)override;
         std::any visitUnaryExpr(std::shared_ptr<Unary> expr)override;
         std::any visitGetExpr(std::shared_ptr<Get> expr) override;
