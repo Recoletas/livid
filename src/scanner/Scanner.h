@@ -1,7 +1,7 @@
 #ifndef SCANNER_H
 #define SCANNER_H
 
-#include "Token.h"
+#include "core/Token.h"
 #include "core/livid.h"
 #include <variant>
 #include <unordered_map>

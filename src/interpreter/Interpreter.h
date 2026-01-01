@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include <map>
+#include <unordered_map>
 
 #include "ast/Expr.h"
 #include "ast/Stmt.h"
@@ -19,7 +20,7 @@ class Interpreter:public ExprVisitor,public StmtVisitor{
     public:
         Interpreter();
         void interpret(std::vector<std::shared_ptr<Stmt>> statements);
-        std::shared_ptr<Environment> globals=std::make_shared<Environment>();
+        std::shared_ptr<Environment> globals;
         std::any visitLiteralExpr(std::shared_ptr<Literal> expr)override;
         std::any visitLogicalExpr(std::shared_ptr<Logical> expr)override;
         std::any visitSetExpr(std::shared_ptr<Set> expr)override;

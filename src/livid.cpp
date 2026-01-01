@@ -3,11 +3,11 @@
 #include <stdexcept>
 #include <vector>
 #include "scanner/Scanner.h"
-#include "Token.h"
-#include "livid.h"
-#include "Parser.h"
-#include "AstPrinter.h"
-#include "RuntimeError.h"
+#include "core/Token.h"
+#include "core/livid.h"
+#include "parser/Parser.h"
+#include "ast/AstPrinter.h"
+#include "core/RuntimeError.h"
 #include "resolve/Resolver.h"
 
 bool Livid::isReplMode =false;
@@ -53,6 +53,7 @@ void Livid::run(const std::string &source){
     std::vector<Token> tokens=scanner.scanTokens();
     Parser parser(tokens);
     std::vector<std::shared_ptr<Stmt>> statements=parser.parse();
+    if(hadError) return;
     
     Resolver resolver(interpreter);
     resolver.resolve(statements);

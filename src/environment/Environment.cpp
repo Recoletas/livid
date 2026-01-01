@@ -6,7 +6,7 @@ void Environment::define(const std::string& name,const std::any& value){
 }
 std::any Environment::getAt(int distance,std::string name){
     auto env=ancestor(distance);
-    return env->values.at(name);
+    return env->values[name];
 }
 void Environment::assignAt(int distance, Token name, std::any value) {
     ancestor(distance)->values[name.getLexeme()]= value;

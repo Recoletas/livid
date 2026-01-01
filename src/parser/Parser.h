@@ -1,8 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "TokenType.h"
-#include "Token.h"
+#include "core/TokenType.h"
+#include "core/Token.h"
 #include "ast/Expr.h"
 #include "core/livid.h"
 #include <vector>

@@ -129,6 +129,54 @@ livid/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/build
 .PHONY : livid/fast
 
+src/class/LividClass.o: src/class/LividClass.cpp.o
+.PHONY : src/class/LividClass.o
+
+# target to build an object file
+src/class/LividClass.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/class/LividClass.cpp.o
+.PHONY : src/class/LividClass.cpp.o
+
+src/class/LividClass.i: src/class/LividClass.cpp.i
+.PHONY : src/class/LividClass.i
+
+# target to preprocess a source file
+src/class/LividClass.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/class/LividClass.cpp.i
+.PHONY : src/class/LividClass.cpp.i
+
+src/class/LividClass.s: src/class/LividClass.cpp.s
+.PHONY : src/class/LividClass.s
+
+# target to generate assembly for a file
+src/class/LividClass.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/class/LividClass.cpp.s
+.PHONY : src/class/LividClass.cpp.s
+
+src/class/LividInstance.o: src/class/LividInstance.cpp.o
+.PHONY : src/class/LividInstance.o
+
+# target to build an object file
+src/class/LividInstance.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/class/LividInstance.cpp.o
+.PHONY : src/class/LividInstance.cpp.o
+
+src/class/LividInstance.i: src/class/LividInstance.cpp.i
+.PHONY : src/class/LividInstance.i
+
+# target to preprocess a source file
+src/class/LividInstance.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/class/LividInstance.cpp.i
+.PHONY : src/class/LividInstance.cpp.i
+
+src/class/LividInstance.s: src/class/LividInstance.cpp.s
+.PHONY : src/class/LividInstance.s
+
+# target to generate assembly for a file
+src/class/LividInstance.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/class/LividInstance.cpp.s
+.PHONY : src/class/LividInstance.cpp.s
+
 src/environment/Environment.o: src/environment/Environment.cpp.o
 .PHONY : src/environment/Environment.o
 
@@ -273,6 +321,30 @@ src/parser/Parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/parser/Parser.cpp.s
 .PHONY : src/parser/Parser.cpp.s
 
+src/resolve/Resolver.o: src/resolve/Resolver.cpp.o
+.PHONY : src/resolve/Resolver.o
+
+# target to build an object file
+src/resolve/Resolver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/resolve/Resolver.cpp.o
+.PHONY : src/resolve/Resolver.cpp.o
+
+src/resolve/Resolver.i: src/resolve/Resolver.cpp.i
+.PHONY : src/resolve/Resolver.i
+
+# target to preprocess a source file
+src/resolve/Resolver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/resolve/Resolver.cpp.i
+.PHONY : src/resolve/Resolver.cpp.i
+
+src/resolve/Resolver.s: src/resolve/Resolver.cpp.s
+.PHONY : src/resolve/Resolver.s
+
+# target to generate assembly for a file
+src/resolve/Resolver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/livid.dir/build.make CMakeFiles/livid.dir/src/resolve/Resolver.cpp.s
+.PHONY : src/resolve/Resolver.cpp.s
+
 src/scanner/Scanner.o: src/scanner/Scanner.cpp.o
 .PHONY : src/scanner/Scanner.o
 
@@ -306,6 +378,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... livid"
+	@echo "... src/class/LividClass.o"
+	@echo "... src/class/LividClass.i"
+	@echo "... src/class/LividClass.s"
+	@echo "... src/class/LividInstance.o"
+	@echo "... src/class/LividInstance.i"
+	@echo "... src/class/LividInstance.s"
 	@echo "... src/environment/Environment.o"
 	@echo "... src/environment/Environment.i"
 	@echo "... src/environment/Environment.s"
@@ -324,6 +402,9 @@ help:
 	@echo "... src/parser/Parser.o"
 	@echo "... src/parser/Parser.i"
 	@echo "... src/parser/Parser.s"
+	@echo "... src/resolve/Resolver.o"
+	@echo "... src/resolve/Resolver.i"
+	@echo "... src/resolve/Resolver.s"
 	@echo "... src/scanner/Scanner.o"
 	@echo "... src/scanner/Scanner.i"
 	@echo "... src/scanner/Scanner.s"

@@ -154,7 +154,6 @@ CMakeFiles/livid.dir/src/parser/Parser.cpp.o: \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/any \
- /home/recoletas/Livid/src/core/TokenType.h \
  /home/recoletas/Livid/src/ast/Expr.h /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_uninitialized.h \
@@ -178,16 +177,16 @@ CMakeFiles/livid.dir/src/parser/Parser.cpp.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /home/recoletas/Livid/src/core/Token.h \
  /home/recoletas/Livid/src/core/livid.h \
  /home/recoletas/Livid/src/interpreter/Interpreter.h \
- /home/recoletas/Livid/src/ast/Stmt.h \
- /home/recoletas/Livid/src/environment/Environment.h \
- /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \
  /usr/include/c++/13/bits/hashtable_policy.h \
  /usr/include/c++/13/bits/enable_special_members.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h \
+ /home/recoletas/Livid/src/ast/Stmt.h \
  /home/recoletas/Livid/src/core/RuntimeError.h

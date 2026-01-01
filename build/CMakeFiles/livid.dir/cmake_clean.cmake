@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/livid.dir/src/class/LividClass.cpp.o"
+  "CMakeFiles/livid.dir/src/class/LividClass.cpp.o.d"
+  "CMakeFiles/livid.dir/src/class/LividInstance.cpp.o"
+  "CMakeFiles/livid.dir/src/class/LividInstance.cpp.o.d"
   "CMakeFiles/livid.dir/src/environment/Environment.cpp.o"
   "CMakeFiles/livid.dir/src/environment/Environment.cpp.o.d"
   "CMakeFiles/livid.dir/src/fun/LividFunction.cpp.o"
@@ -11,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/livid.dir/src/main.cpp.o.d"
   "CMakeFiles/livid.dir/src/parser/Parser.cpp.o"
   "CMakeFiles/livid.dir/src/parser/Parser.cpp.o.d"
+  "CMakeFiles/livid.dir/src/resolve/Resolver.cpp.o"
+  "CMakeFiles/livid.dir/src/resolve/Resolver.cpp.o.d"
   "CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o"
   "CMakeFiles/livid.dir/src/scanner/Scanner.cpp.o.d"
   "livid"

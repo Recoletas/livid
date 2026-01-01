@@ -19,9 +19,10 @@ class LividClass:public Callable,
         std::shared_ptr<LividClass> superclass;
         LividClass(std::string name):name(name){};
         LividClass(std::string name,std::shared_ptr<LividClass> superclass,
-            std::unordered_map<std::string,std::shared_ptr<LividFunction>> methods):name(name),methods(methods){};
+            std::unordered_map<std::string,std::shared_ptr<LividFunction>> methods)
+            :name(name), superclass(superclass),methods(methods){};
         std::string toString()override;
-        std::any call(Interpreter &interpreter,std::vector<std::any> arguments);
+        std::any call(Interpreter &interpreter,std::vector<std::any> arguments)override;
         int arity()override;
         std::shared_ptr<LividFunction> findMethod(std::string name);
     private:

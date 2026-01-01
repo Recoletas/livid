@@ -22,7 +22,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         };
         ClassType currentClass =ClassType::NONE;
         FunctionType currentFunction =FunctionType::NONE;
-        Interpreter interpreter;
+        Interpreter& interpreter;
         std::vector<std::shared_ptr<std::unordered_map<std::string, bool>>> scopes;
         
         void beginScope();
@@ -32,7 +32,7 @@ class Resolver :public ExprVisitor,public StmtVisitor{
         void resolveLocal(std::shared_ptr<Expr> expr,Token name);
         void resolveFunction(std::shared_ptr<Function>  function,FunctionType type);
     public:
-        Resolver(Interpreter &interpreter){this->interpreter=interpreter;}
+        Resolver(Interpreter &interpreter): interpreter(interpreter) {}
         void resolve(std::vector<std::shared_ptr<Stmt>> statements);
         void resolve(std::shared_ptr<Stmt> stmt);
         void resolve(std::shared_ptr<Expr> expr);

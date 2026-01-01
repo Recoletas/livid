@@ -19,6 +19,7 @@
 #include <iostream>
 #include <sstream>
 #include <chrono>
+#include <typeinfo>
 
 class ClockNative : public Callable {
 public:
@@ -67,8 +68,7 @@ void Interpreter::executeBlock(std::vector<std::shared_ptr<Stmt>> statements,std
     this->environment = previous;
 }
 void Interpreter::visitBlockStmt(std::shared_ptr<Block> stmt){
-    auto newEnv=std::make_shared<Environment>(this->environment);
-    executeBlock(stmt->statements,newEnv);
+    executeBlock(stmt->statements,std::make_shared<Environment>(this->environment));
 }
 std::any Interpreter::visitLiteralExpr(std::shared_ptr<Literal> expr){
     return expr->value;
@@ -95,14 +95,14 @@ std::any Interpreter::visitSetExpr(std::shared_ptr<Set> expr){
     return value;
 }
 std::any Interpreter::visitSuperExpr(std::shared_ptr<Super> expr){
-    int distance =locals.at(expr);
+    int distance =locals[expr];
     std::shared_ptr<LividClass> superclass=std::any_cast<std::shared_ptr<LividClass>>(environment->getAt(distance,"super"));
     std::shared_ptr<LividInstance> object=std::any_cast<std::shared_ptr<LividInstance>>(environment->getAt(distance-1,"this"));
     std::shared_ptr<LividFunction> method=superclass->findMethod(expr->method.getLexeme());
     if(method==nullptr){
         throw RuntimeError(expr->method,"Undefined property '"+expr->method.getLexeme()+"'.");
     }
-    return method->bind(object);
+    return std::static_pointer_cast<Callable>(method->bind(object));;
 }
 std::any Interpreter::visitThisExpr(std::shared_ptr<This> expr){
     return lookUpVariable(expr->keyword,expr);
@@ -165,6 +165,9 @@ std::any Interpreter::visitBinaryExpr(std::shared_ptr<Binary> expr){
 }
 std::any Interpreter::visitCallExpr(std::shared_ptr<Call> expr){
     std::any callee=evaluate(expr->callee);
+    if(callee.type()==typeid(void)){
+        throw RuntimeError(expr->paren,"Can't call a null object.");
+    }
     std::vector<std::any> arguments;
     for(std::shared_ptr<Expr> arguement:expr->arguments){
         arguments.push_back(evaluate(arguement));
@@ -222,6 +225,14 @@ bool Interpreter::isEqual(const std::any& a,const std::any& b){
 std::string Interpreter::stringify(std::any obj){
     if(!obj.has_value()) return "nil";
 
+    if (obj.type() == typeid(std::shared_ptr<Callable>)) {
+        return std::any_cast<std::shared_ptr<Callable>>(obj)->toString();
+    }
+
+    if (obj.type() == typeid(std::shared_ptr<LividInstance>)) {
+        return std::any_cast<std::shared_ptr<LividInstance>>(obj)->toString();
+    }
+
     if(obj.type()==typeid(bool)){
         return std::any_cast<bool>(obj)?"true":"false";
     }
@@ -229,10 +240,9 @@ std::string Interpreter::stringify(std::any obj){
     if(obj.type()==typeid(double)){
         double number =std::any_cast<double>(obj);
         std::string text=std::to_string(number);
-
-        if(text.length()>2&&text.substr(text.length()-2)==".0"){
-            text=text.substr(0,text.length()-2);
-        }
+        // 移除末尾多余的 0和.
+        text.erase(text.find_last_not_of('0') + 1, std::string::npos);
+        if(text.back() == '.') text.pop_back();
         return text;
     }
     if(obj.type()==typeid(std::string)){
@@ -312,13 +322,19 @@ std::any Interpreter::visitVariableExpr(std::shared_ptr<Variable> expr){
 }
 void Interpreter::visitClassStmt(std::shared_ptr<Class> stmt){
     std::shared_ptr<LividClass> superclassPtr=nullptr;
-    std::any superclass=std::any{};
     if(stmt->superclass!=nullptr){
-        superclass=evaluate(stmt->superclass);
-        if(superclass.type()!=typeid(std::shared_ptr<LividClass>)){
+        std::shared_ptr<Callable> callable;
+        std::any superclassVal=evaluate(stmt->superclass);
+        try{
+            callable=std::any_cast<std::shared_ptr<Callable>>(superclassVal);
+        }catch(const std::bad_any_cast&){
             throw RuntimeError(stmt->superclass->name,"Superclass must be a class.");
         }
-        superclassPtr=std::any_cast<std::shared_ptr<LividClass>>(superclass);
+        superclassPtr=std::dynamic_pointer_cast<LividClass>(callable);
+        
+        if(superclassPtr==nullptr){
+            throw RuntimeError(stmt->superclass->name,"Superclass must be a class.");
+        }
     }
     environment->define(stmt->name.getLexeme(),std::any{});
     
@@ -337,11 +353,11 @@ void Interpreter::visitClassStmt(std::shared_ptr<Class> stmt){
     if(stmt->superclass!=nullptr){
         environment=environment->getEnclosing();
     }
-    environment->assign(stmt->name,klass);
+    environment->assign(stmt->name,std::static_pointer_cast<Callable>(klass));
 }
 std::any Interpreter::lookUpVariable(Token name, std::shared_ptr<Expr> expr){
-    int distance=locals[expr];
-    if(distance!=NULL){
+    if(locals.find(expr)!=locals.end()){
+        int distance=locals[expr];
         return environment->getAt(distance,name.getLexeme());
     }else{
         return globals->get(name);

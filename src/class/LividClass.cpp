@@ -22,6 +22,9 @@ std::shared_ptr<LividFunction> LividClass::findMethod(std::string name){
 }
 int LividClass::arity(){
     std::shared_ptr<LividFunction> initializer=findMethod("init");
-    if(initializer!=nullptr) return 0;
+    if(initializer==nullptr) return 0;
     return initializer->arity();
+}
+std::string LividClass::toString() {
+    return name;
 }

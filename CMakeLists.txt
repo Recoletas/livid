@@ -9,16 +9,6 @@ project(Livid_Interpreter CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# 包含所有源代码文件
-set(SOURCE_FILES
-    Interpreter.cpp
-    livid.cpp
-    main.cpp
-    Parser.cpp
-    Scanner.cpp
-    Environment.cpp
-    LividFunction.cpp
-)
 
 file(GLOB_RECURSE SOURCE_FILES "src/*.cpp" "src/*/*.cpp")
 
@@ -28,11 +18,4 @@ add_executable(livid ${SOURCE_FILES})
 
 target_include_directories(livid PUBLIC
     ${PROJECT_SOURCE_DIR}/src
-    ${PROJECT_SOURCE_DIR}/src/ast
-    ${PROJECT_SOURCE_DIR}/src/core
-    ${PROJECT_SOURCE_DIR}/src/interpreter
-    ${PROJECT_SOURCE_DIR}/src/parser
-    ${PROJECT_SOURCE_DIR}/src/scanner
-    ${PROJECT_SOURCE_DIR}/src/environment
-    ${PROJECT_SOURCE_DIR}/src/fun
 )
